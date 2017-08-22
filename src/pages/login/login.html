@@ -1,0 +1,20 @@
+<ion-header></ion-header>
+
+<ion-content padding>
+  <button class="register" (tap)="goto_registerPage()">S'enregistrer</button>
+  <div class="logo">
+    <img src="assets/images/backstat.png" alt="">
+  </div>
+  <form [formGroup]="login_form" novalidate (ngSubmit)="sign_in(login_form.value)">
+    <div class="field">
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      <input type="text" placeholder="E-mail" formControlName="email" />
+    </div>
+    <div class="field">
+      <i class="fa fa-lock" aria-hidden="true"></i>
+      <input type="password" placeholder="Password" formControlName="password" />
+    </div>
+
+    <button type="submit">Connexion</button>
+  </form>
+</ion-content>

@@ -1,0 +1,51 @@
+page-login {
+  ion-content.content {
+    div.logo {
+      visibility: hidden;
+      text-align: center;
+    }
+    button.register {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: x-large;
+      border: 0;
+      background-color: transparent;
+      color: color($colors, white);
+      width: 200px;
+      height: 45px;
+    }
+    form {
+      width: 40%;
+      margin: auto;
+      font-size: x-large;
+      div.field {
+        background-color: white;
+        margin-bottom: 20px;
+        display: flex;
+        width: 100%;
+        height: 60px;
+        i {
+          margin: auto;
+          width: 60px;
+          text-align: center;
+          color: color($colors, bleufonce);
+          border-right: 1px solid color($colors, bleufonce);
+        }
+        input {
+          width: calc(100% - 45px);
+          padding-left: 10px;
+          height: 100%;
+        }
+      }
+      button {
+        font-size: x-large;
+        border: 1px solid color($colors, white);
+        background-color: color($colors, bleuclaire);
+        color: color($colors, white);
+        width: 100%;
+        height: 60px;
+      }
+    }
+  }
+}
