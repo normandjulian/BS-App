@@ -1,293 +1,296 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Accueil</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding disable-scroll>
-  <div *ngIf="teams && teams.length !== 0">
-    <ion-row class="header">
-      <ion-col>
-        <ion-list>
-          <ion-item>
-            <ion-select [(ngModel)]="selected_team" (ionChange)="set_team(selected_team)">
-              <ion-option *ngFor="let team of teams" [value]="team">{{team.name}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <!--<ion-icon name="add-circle"></ion-icon>-->
-        <!--<button ion-button>
-          Statistque d'un match
-        </button>-->
-      </ion-col>
-      <ion-col>
-        <div class="shorcuts">
-          <button ion-button clear (tap)="this.pane = 'games'">
-            <ion-icon name="basketball"></ion-icon>
-          </button>
-          <button ion-button clear (tap)="this.pane = 'players'">
-            <ion-icon name="people"></ion-icon>
-          </button>
-          <button ion-button clear (tap)="this.pane = 'detail'">
-            <ion-icon name="cog"></ion-icon>
-          </button>
+    <div *ngIf="teams && teams.length !== 0">
+        <ion-row class="header">
+            <ion-col>
+                <ion-list>
+                    <ion-item>
+                        <ion-select [(ngModel)]="selected_team" (ionChange)="set_team(selected_team)">
+                            <ion-option *ngFor="let team of teams" [value]="team">{{team.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-list>
+                <!--<ion-icon name="add-circle"></ion-icon>-->
+                <!--<button ion-button>
+                  Statistque d'un match
+                </button>-->
+            </ion-col>
+            <ion-col>
+                <div class="shorcuts">
+                    <button ion-button clear (tap)="this.pane = 'games'">
+                        <ion-icon name="basketball"></ion-icon>
+                    </button>
+                    <button ion-button clear (tap)="this.pane = 'players'">
+                        <ion-icon name="people"></ion-icon>
+                    </button>
+                    <button ion-button clear (tap)="this.pane = 'detail'">
+                        <ion-icon name="cog"></ion-icon>
+                    </button>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <div class="dashboard">
+            <div class="content" *ngIf="pane === 'games'">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-4 class="list">
+                            <div class="list">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th class="text-align-center">Date</th>
+                                        <th class="text-align-left">Opposent</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let game of team.games">
+                                        <td class="text-align-center">{{game.date | date:'dd/MM'}}</td>
+                                        <td class="text-align-left">{{game.opponent}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ion-col>
+
+                        <ion-col class="game-pane">
+                            <ion-row>
+                                <ion-col class="resume-game">
+                                    <h3>Match en cours</h3>
+                                    <div class="teams-score">
+                                        <span>{{team.name}}</span>
+                                        <span>Cholet</span>
+                                    </div>
+                                    <div class="teams-score">
+                                        <span>65</span>
+                                        <span>64</span>
+                                    </div>
+                                    <div class="time-action">
+                                        00:21 <span class="quarter">4em Q.</span>
+                                    </div>
+                                    <div class="last-action">
+                                        Anti-Sportive - #12 DUCLUZEAU F.
+                                    </div>
+                                    <div class="button-continue">
+                                        <button ion-button outline>Clore le match</button>
+                                        <button ion-button outline>Reprendre</button>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <div class="stat">
+                                    <span class="stat-label"></span>
+                                    <span class="stat-value"></span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Passes dec. : </span>
+                                    <span class="stat-vale">#21 DUCLUZEAU F. - 6</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Points : #21 </span>
+                                    <span class="stat-vale">DUCLUZEAU F. - 26</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Rebonds : #21 </span>
+                                    <span class="stat-vale">DUCLUZEAU F. - 12</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Interceptions : #21 </span>
+                                    <span class="stat-vale">DUCLUZEAU F. - 2</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Contres : #21 </span>
+                                    <span class="stat-vale">DUCLUZEAU F. - 4</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">  Fautes : #21 </span>
+                                    <span class="stat-vale">GUILLAUTEL M. - 6</span>
+                                </div>
+                                <div class="button-continue">
+                                    <button>Voirs les stats complètes</button>
+                                </div>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <!--<div class="pane">
+                  <div class="continue">
+                    <h3>Match en cours</h3>
+                    <div class="teams-score">
+                      <span>{{team.name}}</span>
+                      <span>Cholet</span>
+                    </div>
+                    <div class="teams-score">
+                      <span>65</span>
+                      <span>64</span>
+                    </div>
+                    <div class="time-action">
+                      00:21 <span class="quarter">4em Q.</span>
+                    </div>
+                    <div class="last-action">
+                      Anti-Sportive - #12 DUCLUZEAU F.
+                    </div>
+                    <div class="button-continue">
+                      <button>Clore le match</button>
+                      <button>Reprendre</button>
+                    </div>
+                  </div>
+                  <div class="stats">
+                    <div class="stat">
+                      <span class="stat-label"></span>
+                      <span class="stat-value"></span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-label">Passes dec. : </span>
+                      <span class="stat-vale">#21 DUCLUZEAU F. - 6</span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-label">Points : #21 </span>
+                      <span class="stat-vale">DUCLUZEAU F. - 26</span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-label">Rebonds : #21 </span>
+                      <span class="stat-vale">DUCLUZEAU F. - 12</span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-label">Interceptions : #21 </span>
+                      <span class="stat-vale">DUCLUZEAU F. - 2</span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-label">Contres : #21 </span>
+                      <span class="stat-vale">DUCLUZEAU F. - 4</span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-label">  Fautes : #21 </span>
+                      <span class="stat-vale">GUILLAUTEL M. - 6</span>
+                    </div>
+                    <div class="button-continue">
+                      <button>Voirs les stats complètes</button>
+                    </div>
+                  </div>
+                </div>-->
+            </div>
+            <div class="content" *ngIf="pane === 'players'">
+                <ion-grid *ngIf="!player_creation_mode">
+                    <ion-row>
+                        <ion-col col-4 class="list">
+                            <div class="list">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th class="text-align-center">#</th>
+                                        <th class="text-align-left">Player</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let player of team.players" (click)="select_player(player)">
+                                        <td class="text-align-center">{{player.number}}</td>
+                                        <td class="text-align-left">{{player.firstname | initiale}} {{player.lastname | reduceName:17}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ion-col>
+                        <ion-col class="players">
+                            <ion-row>
+                                <ion-col>
+                                    <form [formGroup]="player_form" (ngSubmit)="save_player(player_form.value)">
+                                        <ion-grid>
+                                            <ion-row>
+                                                <ion-col col-1>
+                                                    <ion-label color="primary" stacked>#</ion-label>
+                                                    <ion-input placeholder="12" type="number"
+                                                               formControlName="number"></ion-input>
+                                                </ion-col>
+                                                <ion-col>
+                                                    <ion-label color="primary" stacked>Date de naissance</ion-label>
+                                                    <ion-input type="date" formControlName="birthdate"></ion-input>
+                                                </ion-col>
+                                                <ion-col>
+                                                    <ion-label color="primary" stacked>Licence</ion-label>
+                                                    <ion-input placeholder="VT890918"
+                                                               formControlName="license"></ion-input>
+                                                </ion-col>
+                                            </ion-row>
+
+                                            <ion-row>
+                                                <ion-col>
+                                                    <ion-label color="primary" stacked>Prénom</ion-label>
+                                                    <ion-input placeholder="Julian"
+                                                               formControlName="firstname"></ion-input>
+                                                </ion-col>
+                                                <ion-col>
+                                                    <ion-label color="primary" stacked>Nom</ion-label>
+                                                    <ion-input placeholder="Normand"
+                                                               formControlName="lastname"></ion-input>
+                                                </ion-col>
+                                            </ion-row>
+
+                                            <ion-row>
+                                                <ion-col class="actions">
+                                                    <button type="button" ion-button outline>
+                                                        Supprimer
+                                                    </button>
+                                                    <button type="button" ion-button outline (tap)="player_creation_mode = !player_creation_mode">
+                                                        Créer
+                                                    </button>
+                                                    <button type="submit" ion-button outline>
+                                                        Enregistrer
+                                                    </button>
+                                                </ion-col>
+                                            </ion-row>
+                                        </ion-grid>
+                                    </form>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="text-align-right">
+                                    <div>
+                                        <ion-row>
+                                            <ion-col>
+                                                <button ion-button outline>
+                                                    Statistique de tous les matchs
+                                                </button>
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col>
+                                                <ion-list class="list">
+                                                    <ion-item>
+                                                        <ion-select>
+                                                            <ion-option>Bite</ion-option>
+                                                        </ion-select>
+                                                    </ion-item>
+                                                </ion-list>
+                                            </ion-col>
+                                            <ion-col>
+                                                <button ion-button outline>
+                                                    Statistque d'un match
+                                                </button>
+                                            </ion-col>
+                                        </ion-row>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <app-create-player *ngIf="player_creation_mode"
+                                   [team]="team"
+                                   (player)="new_player($event)">
+                </app-create-player>
+            </div>
         </div>
-      </ion-col>
-    </ion-row>
-
-    <div class="dashboard">
-      <div class="content" *ngIf="pane === 'games'">
-        <ion-grid>
-          <ion-row>
-            <ion-col col-4 class="list">
-              <div class="list">
-                <table>
-                  <thead>
-                  <tr>
-                    <th class="text-align-center">Date</th>
-                    <th class="text-align-left">Opposent</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let game of team.games">
-                    <td class="text-align-center">{{game.date | date:'dd/MM'}}</td>
-                    <td class="text-align-left">{{game.opponent}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </ion-col>
-
-            <ion-col class="game-pane">
-              <ion-row>
-                <ion-col class="resume-game">
-                  <h3>Match en cours</h3>
-                  <div class="teams-score">
-                    <span>{{team.name}}</span>
-                    <span>Cholet</span>
-                  </div>
-                  <div class="teams-score">
-                    <span>65</span>
-                    <span>64</span>
-                  </div>
-                  <div class="time-action">
-                    00:21 <span class="quarter">4em Q.</span>
-                  </div>
-                  <div class="last-action">
-                    Anti-Sportive - #12 DUCLUZEAU F.
-                  </div>
-                  <div class="button-continue">
-                    <button ion-button outline>Clore le match</button>
-                    <button ion-button outline>Reprendre</button>
-                  </div>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <div class="stat">
-                  <span class="stat-label"></span>
-                  <span class="stat-value"></span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Passes dec. : </span>
-                  <span class="stat-vale">#21 DUCLUZEAU F. - 6</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Points : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 26</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Rebonds : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 12</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Interceptions : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 2</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Contres : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 4</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">  Fautes : #21 </span>
-                  <span class="stat-vale">GUILLAUTEL M. - 6</span>
-                </div>
-                <div class="button-continue">
-                  <button>Voirs les stats complètes</button>
-                </div>
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <!--<div class="pane">
-          <div class="continue">
-            <h3>Match en cours</h3>
-            <div class="teams-score">
-              <span>{{team.name}}</span>
-              <span>Cholet</span>
-            </div>
-            <div class="teams-score">
-              <span>65</span>
-              <span>64</span>
-            </div>
-            <div class="time-action">
-              00:21 <span class="quarter">4em Q.</span>
-            </div>
-            <div class="last-action">
-              Anti-Sportive - #12 DUCLUZEAU F.
-            </div>
-            <div class="button-continue">
-              <button>Clore le match</button>
-              <button>Reprendre</button>
-            </div>
-          </div>
-          <div class="stats">
-            <div class="stat">
-              <span class="stat-label"></span>
-              <span class="stat-value"></span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Passes dec. : </span>
-              <span class="stat-vale">#21 DUCLUZEAU F. - 6</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Points : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 26</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Rebonds : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 12</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Interceptions : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 2</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Contres : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 4</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">  Fautes : #21 </span>
-              <span class="stat-vale">GUILLAUTEL M. - 6</span>
-            </div>
-            <div class="button-continue">
-              <button>Voirs les stats complètes</button>
-            </div>
-          </div>
-        </div>-->
-      </div>
-      <div class="content" *ngIf="pane === 'players'">
-        <ion-grid>
-          <ion-row>
-            <ion-col col-4 class="list">
-              <div class="list">
-                <table>
-                  <thead>
-                  <tr>
-                    <th class="text-align-center">#</th>
-                    <th class="text-align-left">Player</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let player of team.players">
-                    <td class="text-align-center">{{player.number}}</td>
-                    <td class="text-align-left">{{player.firstname | initiale}} {{player.lastname | reduceName:17}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </ion-col>
-            <ion-col class="players">
-              <ion-row>
-                <ion-col>
-                  <form [formGroup]="player_form" (ngSubmit)="save_player(player_form.value)">
-                    <ion-grid>
-                      <ion-row>
-                        <ion-col col-1>
-                          <ion-label color="primary" stacked>#</ion-label>
-                          <ion-input placeholder="12" type="number" formControlName="number"></ion-input>
-                        </ion-col>
-                        <ion-col>
-                          <ion-label color="primary" stacked>Date de naissance</ion-label>
-                          <ion-input type="date" formControlName="birthdate"></ion-input>
-                        </ion-col>
-                        <ion-col>
-                          <ion-label color="primary" stacked>Licence</ion-label>
-                          <ion-input placeholder="VT890918" formControlName="license"></ion-input>
-                        </ion-col>
-                      </ion-row>
-
-                      <ion-row>
-                        <ion-col>
-                          <ion-label color="primary" stacked>Prénom</ion-label>
-                          <ion-input placeholder="Julian" formControlName="firstname"></ion-input>
-                        </ion-col>
-                        <ion-col>
-                          <ion-label color="primary" stacked>Nom</ion-label>
-                          <ion-input placeholder="Normand" formControlName="lastname"></ion-input>
-                        </ion-col>
-                      </ion-row>
-
-                      <ion-row>
-                        <ion-col class="actions">
-                          <button type="button" ion-button outline>
-                            Supprimer
-                          </button>
-                          <button type="button" ion-button outline (tap)="select_player()">
-                            Créer
-                          </button>
-                          <button type="submit" ion-button outline>
-                            Enregistrer
-                          </button>
-                        </ion-col>
-                      </ion-row>
-                    </ion-grid>
-                  </form>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col class="text-align-right">
-                  <div>
-                    <ion-row>
-                      <ion-col>
-                        <button ion-button outline>
-                          Statistique de tous les matchs
-                        </button>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col>
-                        <ion-list class="list">
-                          <ion-item>
-                            <ion-select>
-                              <ion-option>Bite</ion-option>
-                            </ion-select>
-                          </ion-item>
-                        </ion-list>
-                      </ion-col>
-                      <ion-col>
-                        <button ion-button outline>
-                          Statistque d'un match
-                        </button>
-                      </ion-col>
-                    </ion-row>
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
     </div>
-  </div>
-  <div *ngIf="teams && teams.length === 0" class="no-teams">
-    <div class="text-info">
-      Vous n'avez pas encore d'équipe ! Créez une autre
-      <br/>
-      <br/>
-      <button ion-button icon-only outline (click)="create_team()">
-        <ion-icon name="add-circle"></ion-icon>
-      </button>
+    <div *ngIf="teams && teams.length === 0" class="no-teams">
+        <div class="text-info">
+            Vous n'avez pas encore d'équipe ! Créez en une
+            <br/>
+            <br/>
+            <button ion-button icon-only outline (click)="create_team()">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </div>
     </div>
-  </div>
 </ion-content>

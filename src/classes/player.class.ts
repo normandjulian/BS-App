@@ -4,4 +4,6 @@ export class Player {
     lastname: string;
     number: number;
     team_id?: string;
+    birthdate?: string;
+    license?: string;
 }

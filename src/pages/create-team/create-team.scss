@@ -1,0 +1,20 @@
+page-team {
+  form {
+    height: 100%;
+  }
+  ion-grid.grid {
+    height: 100%;
+  }
+  ion-label.label {
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+    text-align: right;
+  }
+  .stick-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    right: 5px;
+  }
+}

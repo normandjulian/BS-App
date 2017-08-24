@@ -150,7 +150,21 @@ page-dashboard {
           width: 100%;
           text-align: center;
           position: absolute;
-          top: 50%;
+          top: calc(50% - 50px);
+        }
+      }
+      div.no-players {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        color: color($colors, primary);
+        div.text-info {
+          width: 100%;
+          text-align: center;
+          position: absolute;
+          top: calc(50% - 50px);
         }
       }
     }

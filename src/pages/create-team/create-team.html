@@ -1,12 +1,11 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Créer une équipe</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content scroll="false">
-  <form [formGroup]="team_form" novalidate (ngSubmit)="save_team( team_form.value )">
+  <form [formGroup]="team_form" novalidate (ngSubmit)="create( team_form.value )">
     <ion-grid>
 
       <ion-row>
@@ -51,7 +50,7 @@
         </ion-row>
       </div>
 
-      <ion-row>
+      <ion-row class="stick-bottom">
         <ion-col>
           <button type="submit" [disabled]="!team_form.valid" ion-button full color="primary">Créer</button>
         </ion-col>
