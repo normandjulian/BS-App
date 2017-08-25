@@ -12,6 +12,7 @@ import {Player} from "../../../classes/player.class";
 export class CreatePlayerComponent implements OnInit{
     @Input() team;
     @Output() player: EventEmitter<Player> = new EventEmitter<Player>();
+    @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
     private player_form: FormGroup;
     public menu_create: boolean;
 
@@ -33,8 +34,11 @@ export class CreatePlayerComponent implements OnInit{
         );
     }
 
+    public cancel_create_player() {
+        this.cancel.emit(true);
+    }
+
     ngOnInit() {
-        console.log('this.team.players', this.team.players);
-        this.menu_create = (this.team.players.length !== 0);
+        // this.menu_create = (this.team.players.length !== 0);
     };
 }

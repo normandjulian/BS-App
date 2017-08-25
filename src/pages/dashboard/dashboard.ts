@@ -7,6 +7,7 @@ import {Player} from '../../classes/player.class';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {CreateTeamPage} from '../create-team/create-team';
 import {BackStatProvider} from "../../providers/back-stat.provider";
+import _ from 'lodash';
 
 @Component({
     selector: 'page-dashboard',
@@ -17,11 +18,15 @@ import {BackStatProvider} from "../../providers/back-stat.provider";
 export class DashboardPage {
     private teams: Team[];
     private team: TeamFull;
-    private player_form: FormGroup;
     private pane: string;
+    public selected_player: Player;
     private selected_team: Team;
     private selected_game: Game;
     public player_creation_mode: boolean;
+    public layout: any = {
+        zero_player: false,
+        create_player: false
+    };
 
     constructor(private navController: NavController,
                 private dashboardService: DashboardService,
@@ -29,15 +34,6 @@ export class DashboardPage {
                 private fb: FormBuilder,
                 private modalCtrl: ModalController,
                 private bs: BackStatProvider) {
-
-        this.player_form = this.fb.group({
-            _id: ['', []],
-            number: ['', [<any>Validators.required]],
-            firstname: ['', [<any>Validators.required]],
-            lastname: ['', [<any>Validators.required]],
-            birthdate: ['', []],
-            license: ['', []]
-        });
     }
 
     delete_team(_id) {
@@ -64,10 +60,10 @@ export class DashboardPage {
                 this.team = team;
 
                 if (this.team.players.length === 0) {
-                    this.player_creation_mode = true;
+                    this.layout.zero_player = true;
                     this.pane = 'players';
                 } else {
-                    this.select_player(this.team.players[0]);
+                    this.selected_player = this.team.players[0];
                     this.pane = 'players';
                 }
             }
@@ -122,16 +118,6 @@ export class DashboardPage {
         // });
     }
 
-    save_player(player: Player) {
-        console.log('save_player');
-        if (this.player_form.value._id) { // Update
-            console.log('mode update');
-        } else {
-            console.log('mode creation');
-        }
-        // this.dashboardService.
-    }
-
     /**
      * Redirect to the page Team
      */
@@ -143,6 +129,11 @@ export class DashboardPage {
     /********************************** PLAYER **********************************/
     /****************************************************************************/
 
+    public create_first_player() {
+        this.layout.create_player = true;
+        this.layout.zero_player = false;
+    }
+
     /**
      * When a the user create a new player
      * Come from the Output of app-create-player
@@ -150,23 +141,22 @@ export class DashboardPage {
      */
     public new_player(player: Player) {
         this.team.players.push(player);
+        this.layout.create_player = false;
+    }
+
+    public create_player_cancel() {
+        this.layout.create_player = false;
     }
 
     /**
-     * When the user click on the list
-     * Fille the form with its value
+     * When the user update the player
+     * From the app-manage-player
+     * Update the player, to update the list
      * @param player {Player}
      */
-    public select_player(player: Player) {
-        console.log('select_player');
-        this.player_form.patchValue({
-            _id: player._id,
-            lastname: player.lastname,
-            firstname: player.firstname,
-            number: player.number,
-            birthdate: player.birthdate,
-            license: player.license,
-        })
+    public update_player(player: Player) {
+        let player_index = _.findIndex(this.team.players, {_id: player._id});
+        this.team.players[player_index] = player;
     }
 
     ionViewDidLoad() {

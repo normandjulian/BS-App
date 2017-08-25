@@ -15,6 +15,7 @@ import {InitialePipe} from "../pipes/initiale.pipe";
 import {CreateTeamPage} from "../pages/create-team/create-team";
 import {ServiceInterceptorService} from "../providers/service-interceptor.service";
 import {CreatePlayerComponent} from "../pages/dashboard/create-player/create-player";
+import {ManagePlayerComponent} from "../pages/dashboard/manage-player/manage-player";
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import {CreatePlayerComponent} from "../pages/dashboard/create-player/create-pla
         ReduceNamePipe,
         InitialePipe,
         CreateTeamPage,
-        CreatePlayerComponent
+        CreatePlayerComponent,
+        ManagePlayerComponent
     ],
     imports: [
         BrowserModule,

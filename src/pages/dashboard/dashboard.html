@@ -171,80 +171,39 @@
                 </div>-->
             </div>
             <div class="content" *ngIf="pane === 'players'">
-                <ion-grid *ngIf="!player_creation_mode">
+                <ion-grid>
                     <ion-row>
                         <ion-col col-4 class="list">
                             <div class="list">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th class="text-align-center">#</th>
-                                        <th class="text-align-left">Player</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr *ngFor="let player of team.players" (click)="select_player(player)">
-                                        <td class="text-align-center">{{player.number}}</td>
-                                        <td class="text-align-left">{{player.firstname | initiale}} {{player.lastname | reduceName:17}}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <ul>
+                                    <li class="header">
+                                        <span class="number">#</span>
+                                        <span>Joueurs</span>
+                                        <i class="fa fa-user-plus" aria-hidden="true"
+                                           (tap)="layout.create_player = !layout.create_player"></i>
+                                    </li>
+                                    <li *ngFor="let player of team.players" (tap)="selected_player = player">
+                                        <span class="number">{{player.number}}</span>
+                                        <span>{{player.firstname | initiale}} {{player.lastname | reduceName:17}}</span>
+                                    </li>
+                                </ul>
                             </div>
                         </ion-col>
-                        <ion-col class="players">
+                        <ion-col class="players" *ngIf="!layout.zero_player">
                             <ion-row>
                                 <ion-col>
-                                    <form [formGroup]="player_form" (ngSubmit)="save_player(player_form.value)">
-                                        <ion-grid>
-                                            <ion-row>
-                                                <ion-col col-1>
-                                                    <ion-label color="primary" stacked>#</ion-label>
-                                                    <ion-input placeholder="12" type="number"
-                                                               formControlName="number"></ion-input>
-                                                </ion-col>
-                                                <ion-col>
-                                                    <ion-label color="primary" stacked>Date de naissance</ion-label>
-                                                    <ion-input type="date" formControlName="birthdate"></ion-input>
-                                                </ion-col>
-                                                <ion-col>
-                                                    <ion-label color="primary" stacked>Licence</ion-label>
-                                                    <ion-input placeholder="VT890918"
-                                                               formControlName="license"></ion-input>
-                                                </ion-col>
-                                            </ion-row>
-
-                                            <ion-row>
-                                                <ion-col>
-                                                    <ion-label color="primary" stacked>Prénom</ion-label>
-                                                    <ion-input placeholder="Julian"
-                                                               formControlName="firstname"></ion-input>
-                                                </ion-col>
-                                                <ion-col>
-                                                    <ion-label color="primary" stacked>Nom</ion-label>
-                                                    <ion-input placeholder="Normand"
-                                                               formControlName="lastname"></ion-input>
-                                                </ion-col>
-                                            </ion-row>
-
-                                            <ion-row>
-                                                <ion-col class="actions">
-                                                    <button type="button" ion-button outline>
-                                                        Supprimer
-                                                    </button>
-                                                    <button type="button" ion-button outline (tap)="player_creation_mode = !player_creation_mode">
-                                                        Créer
-                                                    </button>
-                                                    <button type="submit" ion-button outline>
-                                                        Enregistrer
-                                                    </button>
-                                                </ion-col>
-                                            </ion-row>
-                                        </ion-grid>
-                                    </form>
+                                    <app-manage-player *ngIf="!layout.create_player"
+                                                       [player]="selected_player"
+                                                       (updated_player)="update_player($event)">
+                                    </app-manage-player>
+                                    <app-create-player *ngIf="layout.create_player"
+                                                       [team]="team"
+                                                       (player)="new_player($event)"
+                                                       (cancel)="create_player_cancel($event)">
+                                    </app-create-player>
                                 </ion-col>
                             </ion-row>
-                            <ion-row>
+                            <ion-row *ngIf="!layout.create_player">
                                 <ion-col class="text-align-right">
                                     <div>
                                         <ion-row>
@@ -274,12 +233,16 @@
                                 </ion-col>
                             </ion-row>
                         </ion-col>
+                        <ion-col [hidden]="!layout.zero_player">
+                            <div class="no-players">
+                                <div class="text-info" (tap)="create_first_player()">
+                                    Vous n'avez pas encore de joueur ! Créez en un
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </ion-col>
                     </ion-row>
                 </ion-grid>
-                <app-create-player *ngIf="player_creation_mode"
-                                   [team]="team"
-                                   (player)="new_player($event)">
-                </app-create-player>
             </div>
         </div>
     </div>

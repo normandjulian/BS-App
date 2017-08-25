@@ -40,6 +40,10 @@ export class DashboardService {
     public create_player(player: Player): Observable<Player> {
         return this.http.post(`${this.bs.get_uri()}/players`, player);
     }
+
+    public update_player(player: Player): Observable<Player> {
+        return this.http.put(`${this.bs.get_uri()}/players/${player._id}`, player);
+    }
     /*  delete_team(_id: String) {
      let headers = new Headers({ 'x-access-token': this.token });
      let options = new RequestOptions({ headers: headers });

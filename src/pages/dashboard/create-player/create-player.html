@@ -1,62 +1,45 @@
-<div class="no-players" [hidden]="menu_create">
-    <div class="text-info">
-        Vous n'avez pas encore de joueur ! Créez en un
-        <br/>
-        <br/>
-        <button ion-button icon-only outline (click)="menu_create = !menu_create">
-            <ion-icon name="add-circle"></ion-icon>
-        </button>
-    </div>
-</div>
-<ion-grid [hidden]="!menu_create">
-    <ion-row>
-        <ion-col col-4 class="list">
-        </ion-col>
-        <ion-col class="players">
+<div>
+    <form [formGroup]="player_form" (ngSubmit)="create_player(player_form.value)">
+        <ion-grid>
             <ion-row>
+                <ion-col col-2>
+                    <ion-label color="primary" stacked>#</ion-label>
+                    <ion-input placeholder="12" type="number" formControlName="number"></ion-input>
+                </ion-col>
                 <ion-col>
-                    <form [formGroup]="player_form" (ngSubmit)="create_player(player_form.value)">
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col col-2>
-                                    <ion-label color="primary" stacked>#</ion-label>
-                                    <ion-input placeholder="12" type="number" formControlName="number"></ion-input>
-                                </ion-col>
-                                <ion-col>
-                                    <ion-label color="primary" stacked>Date de naissance</ion-label>
-                                    <ion-input type="date" formControlName="birthdate"></ion-input>
-                                </ion-col>
-                                <ion-col>
-                                    <ion-label color="primary" stacked>Licence</ion-label>
-                                    <ion-input placeholder="VT890918"
-                                               formControlName="license"></ion-input>
-                                </ion-col>
-                            </ion-row>
-
-                            <ion-row>
-                                <ion-col>
-                                    <ion-label color="primary" stacked>Prénom</ion-label>
-                                    <ion-input placeholder="Julian"
-                                               formControlName="firstname"></ion-input>
-                                </ion-col>
-                                <ion-col>
-                                    <ion-label color="primary" stacked>Nom</ion-label>
-                                    <ion-input placeholder="Normand"
-                                               formControlName="lastname"></ion-input>
-                                </ion-col>
-                            </ion-row>
-
-                            <ion-row>
-                                <ion-col class="actions">
-                                    <button type="submit" ion-button outline>
-                                        Créer
-                                    </button>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </form>
+                    <ion-label color="primary" stacked>Date de naissance</ion-label>
+                    <ion-input type="date" formControlName="birthdate"></ion-input>
+                </ion-col>
+                <ion-col>
+                    <ion-label color="primary" stacked>Licence</ion-label>
+                    <ion-input placeholder="VT890918"
+                               formControlName="license"></ion-input>
                 </ion-col>
             </ion-row>
-        </ion-col>
-    </ion-row>
-</ion-grid>
+
+            <ion-row>
+                <ion-col>
+                    <ion-label color="primary" stacked>Prénom</ion-label>
+                    <ion-input placeholder="Julian"
+                               formControlName="firstname"></ion-input>
+                </ion-col>
+                <ion-col>
+                    <ion-label color="primary" stacked>Nom</ion-label>
+                    <ion-input placeholder="Normand"
+                               formControlName="lastname"></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="actions">
+                    <button type="button" ion-button outline (tap)="cancel_create_player()">
+                        Annuler
+                    </button>
+                    <button type="submit" ion-button outline>
+                        Créer
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</div>
