@@ -1,22 +1,17 @@
-import {Injectable, Inject} from '@angular/core';
-import {Storage} from '@ionic/storage';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {Team, TeamFull} from '../../classes/team.class';
-// import { Game } from '../../classes/game.class';
-// import { BackstatService } from '../../providers/backstat-service';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {BackStatProvider} from "../../providers/back-stat.provider";
 import {HttpClient} from "@angular/common/http";
-import {Subject} from "rxjs/Subject";
 import {Player} from "../../classes/player.class";
 
 @Injectable()
 export class DashboardService {
     // Initialisation for the storage api
     constructor(public http: HttpClient,
-                public storage: Storage,
                 public bs: BackStatProvider) {
     }
 
@@ -25,7 +20,7 @@ export class DashboardService {
      * @returns {Observable<Team[]>}
      */
     get_teams(): Observable<Team[]> {
-        return this.http.get(`${this.bs.get_uri()}/teams`);
+        return this.http.get<Team[]>(`${this.bs.get_uri()}/teams`);
     }
 
     /**
@@ -34,15 +29,15 @@ export class DashboardService {
      * @return {Observable<TeamFull>}         [the team selected]
      */
     public get_team(team_id: string): Observable<TeamFull> {
-        return this.http.get(`${this.bs.get_uri()}/teams/${team_id}/full`);
+        return this.http.get<TeamFull>(`${this.bs.get_uri()}/teams/${team_id}/full`);
     }
 
     public create_player(player: Player): Observable<Player> {
-        return this.http.post(`${this.bs.get_uri()}/players`, player);
+        return this.http.post<Player>(`${this.bs.get_uri()}/players`, player);
     }
 
     public update_player(player: Player): Observable<Player> {
-        return this.http.put(`${this.bs.get_uri()}/players/${player._id}`, player);
+        return this.http.put<Player>(`${this.bs.get_uri()}/players/${player._id}`, player);
     }
     /*  delete_team(_id: String) {
      let headers = new Headers({ 'x-access-token': this.token });

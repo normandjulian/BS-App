@@ -28,6 +28,6 @@ export class TeamService {
      * @return {Observable<TeamFull>}         [the team selected]
      */
     get_team_full(team_id: string): Observable<TeamFull> {
-        return this.http.get(`${this.bs.get_uri()}/teams/${team_id}/full`);
+        return this.http.get<TeamFull>(`${this.bs.get_uri()}/teams/${team_id}/full`);
     }
 }

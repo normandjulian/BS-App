@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {NavController, NavParams, Platform, ViewController} from 'ionic-angular';
 import {TeamService} from './create-team-service';
 import {BackStatProvider} from "../../providers/back-stat.provider";
-import {Team} from "../../classes/team.class";
+import {Team, TeamFull} from "../../classes/team.class";
 
 @Component({
     selector: 'page-create-team',
@@ -29,7 +29,7 @@ export class CreateTeamPage implements OnInit {
         this.service.create_team(value).subscribe(
             (team: Team) => {
                 this.service.get_team_full(team._id).subscribe(
-                    (team_full: Team) => {
+                    (team_full: TeamFull) => {
                         teams = this.bs.get_pure_teams();
                         teams.push(team_full);
                         this.bs.set_teams(teams);
