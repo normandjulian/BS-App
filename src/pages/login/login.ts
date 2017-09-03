@@ -6,6 +6,7 @@ import {Storage} from '@ionic/storage';
 import {DashboardPage} from '../dashboard/dashboard';
 import {BackStatProvider} from '../../providers/back-stat.provider';
 import {LoginService} from "./login-service";
+import {RegisterPage} from "../register/register";
 
 @Component({
     selector: 'page-login',
@@ -64,7 +65,7 @@ export class LoginPage implements OnInit {
      * Redirect to the page Register
      */
     goto_registerPage(): void {
-        // this.modalCtrl.create(RegisterPage).present();
+        this.modalCtrl.create(RegisterPage).present();
     }
 
     save_credits() {

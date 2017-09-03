@@ -1,0 +1,80 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>S'enregistrer</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content scroll="false">
+  <form [formGroup]="register_form" novalidate (ngSubmit)="register(register_form.value, register_form.valid)">
+
+    <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input type="text" placeholder="normandjulian@gmail.com" formControlName="email"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Nom de famille</ion-label>
+            <ion-input type="text" placeholder="Normand" formControlName="lastname"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Prénom</ion-label>
+            <ion-input type="text" placeholder="Normand" formControlName="firstname"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Mot de passe</ion-label>
+            <ion-input type="password" placeholder="*********" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Confirmer le mot de passe</ion-label>
+            <ion-input type="password" placeholder="*********" formControlName="confirm_pwd"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Période</ion-label>
+            <ion-select formControlName="club_id">
+              <ion-option>Séléctionnez une équipe</ion-option>
+              <ion-option *ngFor="let club of clubs" value="{{club._id}}">{{club.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row class="stick-bottom">
+        <ion-col>
+          <button type="submit" [disabled]="!register_form.valid" ion-button full color="primary">Créer</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>

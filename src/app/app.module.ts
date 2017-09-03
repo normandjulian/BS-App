@@ -16,38 +16,41 @@ import {CreateTeamPage} from "../pages/create-team/create-team";
 import {ServiceInterceptorService} from "../providers/service-interceptor.service";
 import {CreatePlayerComponent} from "../pages/dashboard/create-player/create-player";
 import {ManagePlayerComponent} from "../pages/dashboard/manage-player/manage-player";
+import {RegisterPage} from "../pages/register/register";
 
 @NgModule({
-    declarations: [
-        MyApp,
-        LoginPage,
-        DashboardPage,
-        ReduceNamePipe,
-        InitialePipe,
-        CreateTeamPage,
-        CreatePlayerComponent,
-        ManagePlayerComponent
-    ],
-    imports: [
-        BrowserModule,
-        IonicModule.forRoot(MyApp),
-        IonicStorageModule.forRoot(),
-        HttpClientModule
-    ],
-    bootstrap: [IonicApp],
-    entryComponents: [
-        MyApp,
-        LoginPage,
-        DashboardPage,
-        CreateTeamPage
-    ],
-    providers: [
-        StatusBar,
-        SplashScreen,
-        BackStatProvider,
-        {provide: ErrorHandler, useClass: IonicErrorHandler},
-        {provide: HTTP_INTERCEPTORS, useClass: ServiceInterceptorService, multi: true}
-    ]
+  declarations: [
+    MyApp,
+    LoginPage,
+    DashboardPage,
+    RegisterPage,
+    ReduceNamePipe,
+    InitialePipe,
+    CreateTeamPage,
+    CreatePlayerComponent,
+    ManagePlayerComponent
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    HttpClientModule
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    LoginPage,
+    RegisterPage,
+    DashboardPage,
+    CreateTeamPage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    BackStatProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: HTTP_INTERCEPTORS, useClass: ServiceInterceptorService, multi: true}
+  ]
 })
 export class AppModule {
 }
