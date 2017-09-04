@@ -33,7 +33,7 @@
         <ion-col>
           <ion-item>
             <ion-label>Prénom</ion-label>
-            <ion-input type="text" placeholder="Normand" formControlName="firstname"></ion-input>
+            <ion-input type="text" placeholder="Julian" formControlName="firstname"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -59,9 +59,8 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label>Période</ion-label>
+            <ion-label>Club</ion-label>
             <ion-select formControlName="club_id">
-              <ion-option>Séléctionnez une équipe</ion-option>
               <ion-option *ngFor="let club of clubs" value="{{club._id}}">{{club.name}}</ion-option>
             </ion-select>
           </ion-item>

@@ -103,10 +103,11 @@ export class LoginPage implements OnInit {
             });
         }
 
-        this.sign_in({
-            email: 'normandjulian@gmail.com',
-            password: 'juju'
-        });
+        // this.sign_in({
+        //     email: 'normandjulian@gmail.com',
+        //     password: 'juju'
+        // });
+        this.goto_registerPage();
     }
 }
 
