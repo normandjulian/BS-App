@@ -17,6 +17,7 @@ import {ServiceInterceptorService} from "../providers/service-interceptor.servic
 import {CreatePlayerComponent} from "../pages/dashboard/create-player/create-player";
 import {ManagePlayerComponent} from "../pages/dashboard/manage-player/manage-player";
 import {RegisterPage} from "../pages/register/register";
+import {CreateGamePage} from "../pages/create-game/create-game";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {RegisterPage} from "../pages/register/register";
     ReduceNamePipe,
     InitialePipe,
     CreateTeamPage,
+    CreateGamePage,
     CreatePlayerComponent,
     ManagePlayerComponent
   ],
@@ -42,7 +44,8 @@ import {RegisterPage} from "../pages/register/register";
     LoginPage,
     RegisterPage,
     DashboardPage,
-    CreateTeamPage
+    CreateTeamPage,
+    CreateGamePage
   ],
   providers: [
     StatusBar,

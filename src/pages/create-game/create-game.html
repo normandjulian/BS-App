@@ -1,0 +1,79 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>S'enregistrer</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content scroll="false">
+  <form [formGroup]="game_form" novalidate (ngSubmit)="register(game_form.value, game_form.valid)">
+
+    <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Equipe adverse</ion-label>
+            <ion-input type="text" placeholder="Golden State Warrior" formControlName="opponent"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-input type="date" placeholder="12/12/2012" formControlName="date"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!--<ion-row>-->
+        <!--<ion-col>-->
+          <!--<ion-item>-->
+            <!--<ion-label>Prénom</ion-label>-->
+            <!--<ion-input type="text" placeholder="Julian" formControlName="firstname"></ion-input>-->
+          <!--</ion-item>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+
+      <!--<ion-row>-->
+        <!--<ion-col>-->
+          <!--<ion-item>-->
+            <!--<ion-label>Mot de passe</ion-label>-->
+            <!--<ion-input type="password" placeholder="*********" formControlName="password"></ion-input>-->
+          <!--</ion-item>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+
+      <!--<ion-row>-->
+        <!--<ion-col>-->
+          <!--<ion-item>-->
+            <!--<ion-label>Confirmer le mot de passe</ion-label>-->
+            <!--<ion-input type="password" placeholder="*********" formControlName="confirm_pwd"></ion-input>-->
+          <!--</ion-item>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+
+      <!--<ion-row>-->
+        <!--<ion-col>-->
+          <!--<ion-item>-->
+            <!--<ion-label>Club</ion-label>-->
+            <!--<ion-select formControlName="club_id">-->
+              <!--<ion-option *ngFor="let club of clubs" value="{{club._id}}">{{club.name}}</ion-option>-->
+            <!--</ion-select>-->
+          <!--</ion-item>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+
+
+      <ion-row class="stick-bottom">
+        <ion-col>
+          <button type="submit" [disabled]="!register_form.valid" ion-button full color="primary">Créer</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>

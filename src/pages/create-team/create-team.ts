@@ -15,7 +15,6 @@ export class CreateTeamPage implements OnInit {
 
     constructor(public viewCtrl: ViewController,
                 public bs: BackStatProvider,
-                public platform: Platform,
                 public fb: FormBuilder,
                 public service: TeamService) {
     }
