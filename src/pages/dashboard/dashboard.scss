@@ -158,7 +158,7 @@ page-dashboard {
             height: 100%;
             form {
               ion-label.label,
-              ion-input.input {
+              ion-input.input, ion-datetime.datetime {
                 font-size: 22px;
               }
               border-bottom: 1px solid color($colors, primary);

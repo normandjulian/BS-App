@@ -1,0 +1,40 @@
+<form [formGroup]="player_form" (ngSubmit)="update_player(player_form.value)">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <ion-label color="primary" stacked>#</ion-label>
+        <ion-input placeholder="12" type="number" formControlName="number"></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-label color="primary" stacked>Date de naissance</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="birthdate">></ion-datetime>
+      </ion-col>
+      <ion-col>
+        <ion-label color="primary" stacked>Licence</ion-label>
+        <ion-input placeholder="VT890918" formControlName="license"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-label color="primary" stacked>Prénom</ion-label>
+        <ion-input placeholder="Julian" formControlName="firstname"></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-label color="primary" stacked>Nom</ion-label>
+        <ion-input placeholder="Normand" formControlName="lastname"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="actions">
+        <button type="button" ion-button outline>
+            <i class="fa fa-trash-o" aria-hidden="true"></i>&ensp;Supprimer
+        </button>
+        <button type="submit" ion-button outline>
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>&ensp;Enregistrer
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

@@ -15,8 +15,8 @@
         </button>-->
       </ion-col>
       <ion-col>
-        <div class="shorcuts">
-          <button ion-button clear (tap)="this.pane = 'games'">
+        <div class="shorcuts" *ngIf="team">
+          <button ion-button clear (tap)="this.pane = 'games'" [disabled]="team.players.length === 0">
             <ion-icon name="basketball"></ion-icon>
           </button>
           <button ion-button clear (tap)="this.pane = 'players'">
@@ -212,7 +212,7 @@
                   </app-create-player>
                 </ion-col>
               </ion-row>
-              <ion-row *ngIf="!layout.create_player">
+              <!-- <ion-row *ngIf="!layout.create_player">
                 <ion-col class="text-align-right">
                   <div>
                     <ion-row>
@@ -240,13 +240,17 @@
                     </ion-row>
                   </div>
                 </ion-col>
-              </ion-row>
+              </ion-row> -->
             </ion-col>
             <ion-col [hidden]="!layout.zero_player">
               <div class="no-players">
                 <div class="text-info" (tap)="create_first_player()">
                   Vous n'avez pas encore de joueur ! Créez en un
-                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                  <br/>
+                  <br/>
+                  <button ion-button icon-only outline>
+                    <ion-icon name="add-circle"></ion-icon>
+                  </button>
                 </div>
               </div>
             </ion-col>
@@ -260,7 +264,7 @@
       Vous n'avez pas encore d'équipe ! Créez en une
       <br/>
       <br/>
-      <button ion-button icon-only outline (click)="create_team()">
+      <button ion-button icon-only outline (tap)="goto_create_team()">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </div>

@@ -1,14 +1,13 @@
-import {AlertController, NavController, Platform, ModalController} from 'ionic-angular';
-import {Component} from '@angular/core';
-import {DashboardService} from './dashboard-service';
-import {Game} from '../../classes/game.class';
-import {Team, TeamFull} from '../../classes/team.class';
-import {Player} from '../../classes/player.class';
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {CreateTeamPage} from '../create-team/create-team';
-import {BackStatProvider} from "../../providers/back-stat.provider";
+import { AlertController, NavController, ModalController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { DashboardService } from './dashboard-service';
+import { Game } from '../../classes/game.class';
+import { Team, TeamFull } from '../../classes/team.class';
+import { Player } from '../../classes/player.class';
+import { CreateTeamPage } from './create-team/create-team';
+import { BackStatProvider } from "../../providers/back-stat.provider";
+import { CreateGamePage } from "./create-game/create-game";
 import _ from 'lodash';
-import {CreateGamePage} from "../create-game/create-game";
 
 @Component({
   selector: 'page-dashboard',
@@ -17,11 +16,11 @@ import {CreateGamePage} from "../create-game/create-game";
 })
 
 export class DashboardPage {
-  private teams: Team[];
-  private team: TeamFull;
-  private pane: string;
+  public teams: Array<Team | TeamFull>;
+  public team: TeamFull;
+  public pane: string;
   public selected_player: Player;
-  private selected_team: Team;
+  public selected_team: Team; // The team selected in the UI <select/>
   private selected_game: Game;
   public layout: any = {
     zero_player: false,
@@ -31,11 +30,10 @@ export class DashboardPage {
   };
 
   constructor(private navController: NavController,
-              private dashboardService: DashboardService,
-              private alertCtrl: AlertController,
-              private fb: FormBuilder,
-              private modalCtrl: ModalController,
-              private bs: BackStatProvider) {
+    private dashboardService: DashboardService,
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private bs: BackStatProvider) {
   }
 
   delete_team(_id) {
@@ -65,9 +63,8 @@ export class DashboardPage {
           this.layout.zero_player = true;
           this.pane = 'players';
         } else {
-          this.selected_player = this.team.players[0];
-          this.pane = 'games';
-
+          this.selected_player = _.first(this.team.players);
+          this.pane = 'players';
           this.layout.zero_game = (this.team.games.length === 0);
         }
       }
@@ -122,20 +119,27 @@ export class DashboardPage {
     // });
   }
 
+  /************************************************************/
+  /*************************** TEAM ***************************/
+  /************************************************************/
+
   /**
-   * Redirect to the page Team
+   * GO TO -> Create a team
    */
-  create_team(): void {
+  goto_create_team(): void {
     this.modalCtrl.create(CreateTeamPage).present();
   }
 
-  /************************** GAME ***************************/
-
+  /************************************************************/
+  /*************************** GAME ***************************/
+  /************************************************************/
   public create_first_game() {
     this.modalCtrl.create(CreateGamePage).present();
   }
 
+  /*************************************************************/
   /************************** PLAYER ***************************/
+  /*************************************************************/
 
   public create_first_player() {
     this.layout.create_player = true;
@@ -149,11 +153,24 @@ export class DashboardPage {
    */
   public new_player(player: Player) {
     this.team.players.push(player);
+    this.selected_player = _.last(this.team.players);
     this.layout.create_player = false;
+    this.layout.zero_player = false;
   }
 
+  /**
+   * When the user [cancel] the player creation
+   * Show the players if the team have some
+   * Else display the zero player UI
+   */
   public create_player_cancel() {
-    this.layout.create_player = false;
+    // If there are players
+    if (this.team.players.length > 0) {
+      this.layout.create_player = false;
+    } else {
+      // Else, display the zero player UI
+      this.layout.zero_player = true;
+    }
   }
 
   /**
@@ -163,29 +180,25 @@ export class DashboardPage {
    * @param player {Player}
    */
   public update_player(player: Player) {
-    let player_index = _.findIndex(this.team.players, {_id: player._id});
+    let player_index = _.findIndex(this.team.players, { _id: player._id });
     this.team.players[player_index] = player;
   }
 
+  /************************************************************/
+
   ionViewDidLoad() {
     this.bs.get_teams().subscribe(
-      (teams: Team[]) => {
+      (teams: Array<Team | TeamFull>) => {
         this.teams = teams;
         if (this.teams.length !== 0) {
-          this.set_team(this.teams[0]);
+          this.selected_team = _.last(this.teams);
+          this.set_team(_.last(this.teams));
         }
       }
     );
 
     this.dashboardService.get_teams().subscribe(
-      (teams: Team[]) => {
-        this.teams = teams;
-        this.bs.set_teams(teams);
-        if (this.teams.length > 0) {
-          this.selected_team = this.teams[0];
-          this.set_team(this.teams[0]);
-        }
-      },
+      (teams: Team[]) => this.bs.set_teams(teams),
       err => console.error(err)
     );
   };

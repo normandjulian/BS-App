@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DashboardService } from '../dashboard/dashboard-service';
+import { DashboardService } from '../dashboard-service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Game } from "../../classes/game.class";
+import { Game } from "../../../classes/game.class";
 
 @Component({
   selector: 'app-create-game',

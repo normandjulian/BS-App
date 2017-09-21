@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
-import {DashboardService} from '../dashboard-service';
+import {DashboardService} from '../../dashboard-service';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {Player} from "../../../classes/player.class";
+import {Player} from "../../../../classes/player.class";
 
 @Component({
     selector: 'app-manage-player',
@@ -12,7 +12,7 @@ import {Player} from "../../../classes/player.class";
 export class ManagePlayerComponent implements OnInit, OnChanges{
     @Input() player;
     @Output() updated_player: EventEmitter<Player> = new EventEmitter<Player>();
-    private player_form: FormGroup;
+    public player_form: FormGroup;
 
     constructor(private service: DashboardService, private fb: FormBuilder) {
 
@@ -38,7 +38,8 @@ export class ManagePlayerComponent implements OnInit, OnChanges{
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.hasOwnProperty('player')) {
-            
+            console.log(changes.player.currentValue);
+            console.log(new Date(changes.player.currentValue.birthdate));
             this.player_form.patchValue({
                 _id: changes.player.currentValue._id,
                 number: changes.player.currentValue.number,
