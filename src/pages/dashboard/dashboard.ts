@@ -52,26 +52,6 @@ export class DashboardPage {
   }
 
   /**
-   * Select the team which the user tap on it
-   */
-  set_team(team: Team) {
-    this.dashboardService.get_team(team._id).subscribe(
-      (team: TeamFull) => {
-        this.team = team;
-
-        if (this.team.players.length === 0) {
-          this.layout.zero_player = true;
-          this.pane = 'players';
-        } else {
-          this.selected_player = _.first(this.team.players);
-          this.pane = 'players';
-          this.layout.zero_game = (this.team.games.length === 0);
-        }
-      }
-    );
-  }
-
-  /**
    * Store the game selected by the user
    * @param  {Game} game [description]
    */
@@ -122,6 +102,26 @@ export class DashboardPage {
   /************************************************************/
   /*************************** TEAM ***************************/
   /************************************************************/
+  
+  /**
+   * Select the team which the user tap on it
+   */
+  set_team(team: Team) {
+    this.dashboardService.get_team(team._id).subscribe(
+      (team: TeamFull) => {
+        this.team = team;
+
+        if (this.team.players.length === 0) {
+          this.layout.zero_player = true;
+          this.pane = 'players';
+        } else {
+          this.selected_player = _.first(this.team.players);
+          this.pane = 'games';
+          this.layout.zero_game = (this.team.games.length === 0);
+        }
+      }
+    );
+  }
 
   /**
    * GO TO -> Create a team
@@ -133,15 +133,16 @@ export class DashboardPage {
   /************************************************************/
   /*************************** GAME ***************************/
   /************************************************************/
-  public create_first_game() {
-    this.modalCtrl.create(CreateGamePage).present();
+  
+  public goto_first_game() {
+    this.modalCtrl.create(CreateGamePage, this.team).present();
   }
 
   /*************************************************************/
   /************************** PLAYER ***************************/
   /*************************************************************/
 
-  public create_first_player() {
+  public goto_first_player() {
     this.layout.create_player = true;
     this.layout.zero_player = false;
   }

@@ -81,6 +81,9 @@ page-dashboard {
                           width: 40px;
                           text-align: center;
                         }
+                        &.title {
+                          padding-left: 7.5px
+                        }
                       }
                       //&:last-of-type {
                       //  border-bottom: none;

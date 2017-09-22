@@ -8,7 +8,7 @@ import { Player } from "../../../../classes/player.class";
     templateUrl: 'create-player.html',
     providers: [DashboardService]
 })
-export class CreatePlayerComponent {
+export class CreatePlayerComponent implements OnInit {
     @Input() team;
     @Output() player: EventEmitter<Player> = new EventEmitter<Player>();
     @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -29,11 +29,18 @@ export class CreatePlayerComponent {
         player.team_id = this.team._id;
         this.service.create_player(player).subscribe(
             (response: Player) => this.player.emit(response),
-            (err) => console.log(err) 
+            (err) => console.log(err)
         );
     }
 
     public cancel_create_player() {
         this.cancel.emit(true);
+    }
+
+    ngOnInit() {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        this.player_form.patchValue({
+            birthdate: new Date()
+        });
     }
 }

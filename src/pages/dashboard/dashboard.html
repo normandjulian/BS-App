@@ -39,9 +39,8 @@
               <div class="list">
                 <ul>
                   <li class="header">
-                    <span>Adversaire</span>
-                    <i class="fa fa-user-plus" aria-hidden="true"
-                       (tap)="layout.game_player = !layout.game_player"></i>
+                    <span class="title">Matchs</span>
+                    <i class="fa fa-user-plus" aria-hidden="true" (tap)="layout.game_player = !layout.game_player"></i>
                   </li>
                   <li *ngFor="let game of team.games" (tap)="selected_game = game">
                     <span>{{game.opponent | reduceName:17}}</span>
@@ -112,9 +111,13 @@
 
             <ion-col [hidden]="!layout.zero_game">
               <div class="no-players">
-                <div class="text-info" (tap)="create_first_game()">
+                <div class="text-info" (tap)="goto_first_game()">
                   Vous n'avez pas encore de match ! Créez en un
-                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                  <br/>
+                  <br/>
+                  <button ion-button icon-only outline>
+                    <ion-icon name="add-circle"></ion-icon>
+                  </button>
                 </div>
               </div>
             </ion-col>
@@ -186,8 +189,7 @@
               <div class="list">
                 <ul>
                   <li class="header">
-                    <span class="number">#</span>
-                    <span>Joueurs</span>
+                    <span class="title">Joueurs</span>
                     <i class="fa fa-user-plus" aria-hidden="true"
                        (tap)="layout.create_player = !layout.create_player"></i>
                   </li>
@@ -244,7 +246,7 @@
             </ion-col>
             <ion-col [hidden]="!layout.zero_player">
               <div class="no-players">
-                <div class="text-info" (tap)="create_first_player()">
+                <div class="text-info" (tap)="goto_first_player()">
                   Vous n'avez pas encore de joueur ! Créez en un
                   <br/>
                   <br/>
