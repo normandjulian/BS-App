@@ -39,8 +39,8 @@ export class ManagePlayerComponent implements OnChanges{
                 number: changes.player.currentValue.number,
                 firstname: changes.player.currentValue.firstname,
                 lastname: changes.player.currentValue.lastname,
-                birthdate: changes.player.currentValue.birthdate,
-                license: changes.player.currentValue.license
+                birthdate: changes.player.currentValue.birthdate || null,
+                license: changes.player.currentValue.license || null
             });
 
         }

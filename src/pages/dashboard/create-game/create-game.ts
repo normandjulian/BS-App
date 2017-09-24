@@ -50,8 +50,9 @@ export class CreateGamePage {
   ionViewDidLoad() {
     this.game_form.patchValue({
       period: {
-        type: (this.params.data.period && this.params.data.period.type) ? this.params.data.period.type : null,
-        time: (this.params.data.period && this.params.data.period.time) ? this.params.data.period.time : null,
+        date: '11-11-2017',
+        type: (this.params.data.period && this.params.data.period.type) ? this.params.data.period.type : 4,
+        time: (this.params.data.period && this.params.data.period.time) ? this.params.data.period.time : 10,
       }
     });
   };
