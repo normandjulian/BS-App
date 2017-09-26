@@ -1,4 +1,5 @@
-import { NavParams } from 'ionic-angular';
+import { Team } from './../../../classes/team.class';
+import { NavParams, ModalController, ViewController } from 'ionic-angular';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DashboardService } from '../dashboard-service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -11,21 +12,21 @@ import { Game } from "../../../classes/game.class";
 })
 
 export class CreateGamePage {
-  @Input() team;
-  @Output() game: EventEmitter<Game> = new EventEmitter<Game>();
-  @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private game_form: FormGroup;
+  private team: Team;
+  public game_form: FormGroup;
   public menu_create: boolean;
 
   constructor(
     private service: DashboardService,
     private fb: FormBuilder,
-    private params: NavParams) {
+    private params: NavParams,
+    private view: ViewController) {
 
+    // #TODO Add a input mask for the time
     this.game_form = this.fb.group({
       opponent: ['', [<any>Validators.required]],
-      date: ['', [<any>Validators.required]],
-      time: ['', [<any>Validators.required]],
+      date: [new Date().toISOString(), [<any>Validators.required]],
+      time: ['20:00', [Validators.pattern('([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]')]],
       period: this.fb.group({
         type: [4, [<any>Validators.required]],
         time: [10, [<any>Validators.required]]
@@ -34,25 +35,28 @@ export class CreateGamePage {
     });
   }
 
-  /*
-  public create_game(game: Game) {
+  /**
+   * Create a new game
+   * @param {Game} game 
+   * @param {boolean} isValid 
+   */
+  public create(game: Game, isValid: boolean) {
     game.team_id = this.team._id;
     this.service.create_game(game).subscribe(
-      (response: game) => this.game.emit(response)
+      (response: Game) => {
+        this.view.dismiss(response);
+      },
+      (err) => console.log(err)
     );
-  }
-  */
-
-  public cancel_create_game() {
-    this.cancel.emit(true);
   }
 
   ionViewDidLoad() {
+    this.team = this.params.data;
+    console.log(this.team);
     this.game_form.patchValue({
       period: {
-        date: '11-11-2017',
-        type: (this.params.data.period && this.params.data.period.type) ? this.params.data.period.type : 4,
-        time: (this.params.data.period && this.params.data.period.time) ? this.params.data.period.time : 10,
+        type: (this.team.period && this.team.period.type) ? this.team.period.type : 4,
+        time: (this.team.period && this.team.period.time) ? this.team.period.time : 10,
       }
     });
   };

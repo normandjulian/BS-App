@@ -102,7 +102,7 @@ export class DashboardPage {
   /************************************************************/
   /*************************** TEAM ***************************/
   /************************************************************/
-  
+
   /**
    * Select the team which the user tap on it
    */
@@ -133,9 +133,15 @@ export class DashboardPage {
   /************************************************************/
   /*************************** GAME ***************************/
   /************************************************************/
-  
-  public goto_first_game() {
-    this.modalCtrl.create(CreateGamePage, this.team).present();
+
+  public goto_create_game() {
+    let create_game_page = this.modalCtrl.create(CreateGamePage, this.team);
+    create_game_page.onDidDismiss(
+      (response: Game) => {
+        this.team.games.push(response);
+      }
+    );
+    create_game_page.present();
   }
 
   /*************************************************************/

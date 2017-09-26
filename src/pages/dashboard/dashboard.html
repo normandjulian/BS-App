@@ -40,7 +40,7 @@
                 <ul>
                   <li class="header">
                     <span class="title">Matchs</span>
-                    <i class="fa fa-user-plus" aria-hidden="true" (tap)="layout.game_player = !layout.game_player"></i>
+                    <i class="fa fa-user-plus" aria-hidden="true" (tap)="goto_create_game()"></i>
                   </li>
                   <li *ngFor="let game of team.games" (tap)="selected_game = game">
                     <span>{{game.opponent | reduceName:17}}</span>
@@ -111,7 +111,7 @@
 
             <ion-col [hidden]="!layout.zero_game">
               <div class="no-players">
-                <div class="text-info" (tap)="goto_first_game()">
+                <div class="text-info" (tap)="goto_create_game()">
                   Vous n'avez pas encore de match ! Créez en un
                   <br/>
                   <br/>

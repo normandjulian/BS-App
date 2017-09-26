@@ -1,18 +1,19 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
-import {Team, TeamFull} from '../../classes/team.class';
+import { Game } from './../../classes/game.class';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { Team, TeamFull } from '../../classes/team.class';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {BackStatProvider} from "../../providers/back-stat.provider";
-import {HttpClient} from "@angular/common/http";
-import {Player} from "../../classes/player.class";
+import { BackStatProvider } from "../../providers/back-stat.provider";
+import { HttpClient } from "@angular/common/http";
+import { Player } from "../../classes/player.class";
 
 @Injectable()
 export class DashboardService {
     // Initialisation for the storage api
     constructor(public http: HttpClient,
-                public bs: BackStatProvider) {
+        public bs: BackStatProvider) {
     }
 
     /**
@@ -38,6 +39,19 @@ export class DashboardService {
 
     public update_player(player: Player): Observable<Player> {
         return this.http.put<Player>(`${this.bs.get_uri()}/players/${player._id}`, player);
+    }
+
+    /************************************************************/
+    /*************************** GAME ***************************/
+    /************************************************************/
+
+    /**
+     * Create a game linked to its team with the attribute team_id
+     * @param  {Game} game - The game to create
+     * @returns {Observable<Team[]>} - The game created
+     */
+    public create_game(game: Game): Observable<Game> {
+        return this.http.post<Game>(`${this.bs.get_uri()}/games`, game);
     }
     /*  delete_team(_id: String) {
      let headers = new Headers({ 'x-access-token': this.token });
