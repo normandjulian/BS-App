@@ -1,4 +1,4 @@
-import { Team } from './../../../classes/team.class';
+import { Team, TeamFull } from './../../../classes/team.class';
 import { NavParams, ModalController, ViewController } from 'ionic-angular';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DashboardService } from '../dashboard-service';
@@ -12,7 +12,7 @@ import { Game } from "../../../classes/game.class";
 })
 
 export class CreateGamePage {
-  private team: Team;
+  public team: TeamFull;
   public game_form: FormGroup;
   public menu_create: boolean;
 
@@ -52,7 +52,6 @@ export class CreateGamePage {
 
   ionViewDidLoad() {
     this.team = this.params.data;
-    console.log(this.team);
     this.game_form.patchValue({
       period: {
         type: (this.team.period && this.team.period.type) ? this.team.period.type : 4,

@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content scroll="false">
+<ion-content scroll="false" *ngIf="team">
   <form [formGroup]="game_form" novalidate (ngSubmit)="create(game_form.value, game_form.valid)">
 
     <ion-grid>
@@ -26,7 +26,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      
+
       <ion-row>
         <ion-col>
           <ion-item>
@@ -35,15 +35,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-
-      <!--<ion-row>-->
-        <!--<ion-col>-->
-          <!--<ion-item>-->
-            <!--<ion-label>Prénom</ion-label>-->
-            <!--<ion-input type="text" placeholder="Julian" formControlName="firstname"></ion-input>-->
-          <!--</ion-item>-->
-        <!--</ion-col>-->
-      <!--</ion-row>-->
 
       <div formGroupName="period">
         <ion-row>
@@ -68,6 +59,27 @@
           </ion-col>
         </ion-row>
       </div>
+
+      <ion-row>
+        <ion-col>
+          <ion-label>Joueurs séléctionnés</ion-label>
+        </ion-col>
+        <ion-col>
+          <ul>
+            <li *ngFor="let player of team.players">
+              <img src="assets/images/jersey/_{{player.number}}-tee-shirt.svg">
+            </li>
+          </ul>
+          <!-- <ion-list>
+            <ion-item *ngFor="let player of team.players">
+              <ion-thumbnail item-start>
+                <img src="assets/images/jersey/_{{player.number}}-tee-shirt.svg">
+              </ion-thumbnail>
+              <h2>{{player.firstname}}</h2>
+            </ion-item>
+          </ion-list> -->
+        </ion-col>
+      </ion-row>
 
       <ion-row class="stick-bottom">
         <ion-col>

@@ -118,6 +118,8 @@ export class DashboardPage {
           this.selected_player = _.first(this.team.players);
           this.pane = 'games';
           this.layout.zero_game = (this.team.games.length === 0);
+
+          this.goto_create_game();
         }
       }
     );
@@ -138,7 +140,9 @@ export class DashboardPage {
     let create_game_page = this.modalCtrl.create(CreateGamePage, this.team);
     create_game_page.onDidDismiss(
       (response: Game) => {
-        this.team.games.push(response);
+        if (response) {
+          this.team.games.push(response);
+        }
       }
     );
     create_game_page.present();

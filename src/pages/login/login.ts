@@ -53,6 +53,7 @@ export class LoginPage implements OnInit {
           this.notification(token['message']);
         } else {
           this.storage.set('credits', JSON.stringify(token));
+          console.log(token.token);
           this.bs.set_token(token.token);
           this.navCtrl.setRoot(DashboardPage);
         }
