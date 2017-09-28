@@ -65,9 +65,10 @@
           <ion-label>Joueurs séléctionnés</ion-label>
         </ion-col>
         <ion-col>
-          <ul>
-            <li *ngFor="let player of team.players">
+          <ul class="list-players">
+            <li *ngFor="let player of team.players" (tap)="player.play = !player.play" [ngClass]="{'checked': player.play}">
               <img src="assets/images/jersey/_{{player.number}}-tee-shirt.svg">
+              <!-- <i class="fa fa-check-circle" aria-hidden="true"></i> -->
             </li>
           </ul>
           <!-- <ion-list>

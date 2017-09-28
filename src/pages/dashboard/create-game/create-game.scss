@@ -1,21 +1,52 @@
 page-create-game {
-    form {
-      height: 100%;
-    }
-    ion-grid.grid {
-      height: 100%;
-    }
-    ion-label.label {
-      width: 200px;
-      max-width: 200px;
-      min-width: 200px;
-      text-align: right;
-    }
-    .stick-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 5px;
-      right: 5px;
+  form {
+    height: 100%;
+  }
+  ion-grid.grid {
+    height: 100%;
+  }
+  ion-label.label {
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+    text-align: right;
+  }
+  .stick-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    right: 5px;
+  }
+  ul.list-players {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      width: 25%;
+      position: relative;
+      img {
+        height: 58px;
+        width: 100%;
+      }
+      &.checked {
+        &:before {
+          content: '';
+        }
+      }
+      &:before {
+        content: '\f05d';
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        color: green;
+        font-size: 26px;
+        padding-right: 0.5em;
+        position: absolute;
+        top: 39px;
+        left: 47px;
+      }
     }
   }
-  
+}
