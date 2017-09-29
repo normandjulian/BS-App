@@ -18,7 +18,8 @@ page-dashboard {
                 height: 100%;
                 margin: 0;
                 width: 70px;
-                border: 1px solid color($colors, primary);;
+                border: 1px solid color($colors, primary);
+                ;
                 margin-left: 25px;
                 margin-right: 25px;
                 &:first-of-type {
@@ -45,7 +46,7 @@ page-dashboard {
           ion-grid.grid {
             height: 100%;
             padding: 0;
-            > ion-row {
+            >ion-row {
               height: 100%;
               ion-col.list {
                 padding: 0;
@@ -54,7 +55,6 @@ page-dashboard {
                 div.list {
                   overflow: auto;
                   height: 100%;
-
                   ul {
                     margin: 0;
                     padding: 0;
@@ -69,7 +69,6 @@ page-dashboard {
                       color: color($colors, dark);
                       border-bottom: 1px solid color($colors, primary);
                       display: flex;
-
                       &.header {
                         background-color: color($colors, primary);
                         color: color($colors, white);
@@ -85,83 +84,53 @@ page-dashboard {
                           padding-left: 7.5px
                         }
                       }
-                      //&:last-of-type {
-                      //  border-bottom: none;
-                      //}
-                    }
-                  }
-
-                  table {
-                    width: 100%;
-                    thead {
-                      background-color: color($colors, primary);
-                      tr {
-                        color: color($colors, white);
-                      }
-                    }
-                    tr {
-                      font-size: 24px;
-                      text-transform: uppercase;
-                      height: 45px;
-                      color: color($colors, dark);
-                      border: 1px solid color($colors, primary);
-                    }
-                    .number {
-                      width: 45px;
                     }
                   }
                 }
               }
             }
           }
-          ion-col.game-pane {
-            > :nth-child(1) {
-              height: calc(50% - 15px);
-            }
-            > :nth-child(2) {
-              margin-top: 15px;
-              height: 50%;
-            }
-            > div {
-              border: 1px solid color($colors, white);
-              padding: 15px;
-              h3 {
-                height: 25px;
-              }
-            }
-            ion-col.resume-game {
+          ion-col.games {
+            height: 100%;
+            div.actual-game {
               margin-bottom: 15px;
               text-align: center;
-              div.teams-score {
+              position: relative;
+              height: 100%;
+              div.time {
+                font-size: 4.5em;
+                width: 100%;
+              }
+              div.quarter {
+                font-size: 2.5em;
+                width: 100%;
+              }
+              div.teams, div.score {
                 display: flex;
                 justify-content: space-between;
                 span {
-                  font-size: x-large;
+                  font-size: 2em;
                   width: 50%;
                 }
               }
-              div.time-action {
-                font-size: large;
-                width: 100%;
+              div.score {
+                span {
+                  font-size: 4.5em
+                }
               }
-              div.button-continue {
-                margin-top: 15px;
-                text-align: right;
+              div.buttons {
+                position: absolute;
+                bottom: 2px;
+                right: 5px;
               }
-            }
-          }
-          ion-list {
-            height: 100%;
-            overflow: auto;
-            ion-item {
-              font-size: 22px;
             }
           }
           ion-col.players {
             height: 100%;
             form {
               ion-label.label,
-              ion-input.input, ion-datetime.datetime {
+              ion-input.input,
+              ion-datetime.datetime {
                 font-size: 22px;
               }
               border-bottom: 1px solid color($colors, primary);

@@ -50,31 +50,26 @@
             </ion-col>
 
             <!-- Detail game -->
-            <ion-col class="game-pane" *ngIf="!layout.zero_game">
-              <ion-row>
-                <ion-col class="resume-game">
-                  <h3>Match en cours</h3>
-                  <div class="teams-score">
-                    <span>{{team.name}}</span>
-                    <span>Cholet</span>
-                  </div>
-                  <div class="teams-score">
-                    <span>65</span>
-                    <span>64</span>
-                  </div>
-                  <div class="time-action">
-                    00:21 <span class="quarter">4em Q.</span>
-                  </div>
-                  <div class="last-action">
-                    Anti-Sportive - #12 DUCLUZEAU F.
-                  </div>
-                  <div class="button-continue">
-                    <button ion-button outline>Clore le match</button>
-                    <button ion-button outline>Reprendre</button>
-                  </div>
-                </ion-col>
-              </ion-row>
-              <ion-row>
+            <ion-col class="games" *ngIf="!layout.zero_game">
+              <div class="actual-game">
+                <div class="time">10:00</div>
+                <div class="teams">
+                  <span>{{team.name}}</span>
+                  <span>{{selected_game.opponent}}</span>
+                </div>
+                <div class="quarter">1er Q.</div>
+                <div class="score">
+                  <span>0</span>
+                  <span>0</span>
+                </div>
+                <div class="last-action">
+                  <!-- Anti-Sportive - #12 DUCLUZEAU F. -->
+                </div>
+                <div class="buttons">
+                  <button ion-button outline>Débuter le match</button>
+                </div>
+              </div>
+              <!-- <ion-row>
                 <div class="stat">
                   <span class="stat-label"></span>
                   <span class="stat-value"></span>
@@ -106,7 +101,7 @@
                 <div class="button-continue">
                   <button>Voirs les stats complètes</button>
                 </div>
-              </ion-row>
+              </ion-row> -->
             </ion-col>
 
             <ion-col [hidden]="!layout.zero_game">
@@ -184,14 +179,14 @@
       <div class="content" *ngIf="pane === 'players'">
         <ion-grid>
           <ion-row>
+
             <!-- List of players -->
             <ion-col col-4 class="list">
               <div class="list">
                 <ul>
                   <li class="header">
                     <span class="title">Joueurs</span>
-                    <i class="fa fa-user-plus" aria-hidden="true"
-                       (tap)="layout.create_player = !layout.create_player"></i>
+                    <i class="fa fa-user-plus" aria-hidden="true" (tap)="layout.create_player = !layout.create_player"></i>
                   </li>
                   <li *ngFor="let player of team.players" (tap)="selected_player = player">
                     <span class="number">{{player.number}}</span>
@@ -200,17 +195,13 @@
                 </ul>
               </div>
             </ion-col>
+
             <ion-col class="players" *ngIf="!layout.zero_player">
               <ion-row>
                 <ion-col>
-                  <app-manage-player *ngIf="!layout.create_player"
-                                     [player]="selected_player"
-                                     (updated_player)="update_player($event)">
+                  <app-manage-player *ngIf="!layout.create_player" [player]="selected_player" (updated_player)="update_player($event)">
                   </app-manage-player>
-                  <app-create-player *ngIf="layout.create_player"
-                                     [team]="team"
-                                     (player)="new_player($event)"
-                                     (cancel)="create_player_cancel($event)">
+                  <app-create-player *ngIf="layout.create_player" [team]="team" (player)="new_player($event)" (cancel)="create_player_cancel($event)">
                   </app-create-player>
                 </ion-col>
               </ion-row>

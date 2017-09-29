@@ -1,3 +1,4 @@
+import { GameFull } from './../../classes/game.class';
 import { AlertController, NavController, ModalController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { DashboardService } from './dashboard-service';
@@ -18,10 +19,11 @@ import _ from 'lodash';
 export class DashboardPage {
   public teams: Array<Team | TeamFull>;
   public team: TeamFull;
+  public game: GameFull;
   public pane: string;
   public selected_player: Player;
   public selected_team: Team; // The team selected in the UI <select/>
-  private selected_game: Game;
+  public selected_game: Game;
   public layout: any = {
     zero_player: false,
     create_player: false,
@@ -30,7 +32,7 @@ export class DashboardPage {
   };
 
   constructor(private navController: NavController,
-    private dashboardService: DashboardService,
+    private service: DashboardService,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private bs: BackStatProvider) {
@@ -38,7 +40,7 @@ export class DashboardPage {
 
   delete_team(_id) {
     /*this.notification('Supprimer cette équipe ?', 'Supprimer une équipe, supprime aussi ses joueurs, ses matchs et ses statistiques', 'Peu m\'importe', () => {
-     this.dashboardService.delete_team(_id).subscribe(
+     this.service.delete_team(_id).subscribe(
      res => {
      for (let key in this.teams) {
      if (this.teams[key]._id === _id) {
@@ -107,7 +109,7 @@ export class DashboardPage {
    * Select the team which the user tap on it
    */
   set_team(team: Team) {
-    this.dashboardService.get_team(team._id).subscribe(
+    this.service.get_team(team._id).subscribe(
       (team: TeamFull) => {
         this.team = team;
 
@@ -117,9 +119,13 @@ export class DashboardPage {
         } else {
           this.selected_player = _.first(this.team.players);
           this.pane = 'games';
-          this.layout.zero_game = (this.team.games.length === 0);
 
-          this.goto_create_game();
+          if (this.team.games.length === 0) {
+            this.layout.zero_game = true;
+          } else {
+            this.selected_game = _.first(this.team.games);
+            this.get_game(this.selected_game);
+          }
         }
       }
     );
@@ -146,6 +152,13 @@ export class DashboardPage {
       }
     );
     create_game_page.present();
+  }
+
+  public get_game(game: Game) {
+    this.service.get_game(game._id).subscribe(
+      (response: Game) => this.game = response,
+      (error: any) => console.log(error)
+    );
   }
 
   /*************************************************************/
@@ -208,7 +221,7 @@ export class DashboardPage {
       }
     );
 
-    this.dashboardService.get_teams().subscribe(
+    this.service.get_teams().subscribe(
       (teams: Team[]) => this.bs.set_teams(teams),
       err => console.error(err)
     );

@@ -1,3 +1,4 @@
+import { Game } from './game.class';
 import { Player } from './player.class';
 
 export class Team {
@@ -19,5 +20,5 @@ export class TeamFull {
     time: number
   };
   players: Array<Player>;
-  games: Array<Object>;
+  games: Array<Game>;
 }

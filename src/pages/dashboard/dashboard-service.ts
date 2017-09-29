@@ -1,4 +1,4 @@
-import { Game } from './../../classes/game.class';
+import { Game, GameFull } from './../../classes/game.class';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Team, TeamFull } from '../../classes/team.class';
@@ -53,6 +53,16 @@ export class DashboardService {
     public create_game(game: Game): Observable<Game> {
         return this.http.post<Game>(`${this.bs.get_uri()}/games`, game);
     }
+
+    /**
+     * Get the actual game selected by the user
+     * @param  {string}               game_id [the id of the game selected]
+     * @return {Observable<GameFull>}         [the game selected]
+     */
+    public get_game(game_id: string): Observable<GameFull> {
+        return this.http.get<GameFull>(`${this.bs.get_uri()}/games/${game_id}/full`);
+    }
+
     /*  delete_team(_id: String) {
      let headers = new Headers({ 'x-access-token': this.token });
      let options = new RequestOptions({ headers: headers });

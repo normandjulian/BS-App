@@ -6,4 +6,5 @@ export class Player {
     team_id?: string;
     birthdate?: string;
     license?: string;
+    dnd?: boolean;
 }

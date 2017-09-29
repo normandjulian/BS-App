@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DashboardService } from '../dashboard-service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Game } from "../../../classes/game.class";
-
+import _ from 'lodash';
 @Component({
   selector: 'page-create-game',
   templateUrl: 'create-game.html',
@@ -42,6 +42,11 @@ export class CreateGamePage {
    */
   public create(game: Game, isValid: boolean) {
     game.team_id = this.team._id;
+    game.players = _.filter(this.team.players, (player) => {
+      return (!player.dnp);
+    }).map((player) => {
+      return player._id;
+    });
     this.service.create_game(game).subscribe(
       (response: Game) => {
         this.view.dismiss(response);
