@@ -109,12 +109,18 @@ export class DashboardPage {
    * Select the team which the user tap on it
    */
   set_team(team: Team) {
+    let players_length: number;
     this.service.get_team(team._id).subscribe(
       (team: TeamFull) => {
         this.team = team;
+        players_length = this.team.players.length;
 
-        if (this.team.players.length === 0) {
+        // If there's no player
+        if (players_length === 0) {
           this.layout.zero_player = true;
+        } else if (this.team.players.length < 6) {
+          // If there's less than 5 players
+          this.selected_player = _.first(this.team.players);
           this.pane = 'players';
         } else {
           this.selected_player = _.first(this.team.players);

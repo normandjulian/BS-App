@@ -34,6 +34,7 @@ export class ManagePlayerComponent implements OnChanges{
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.hasOwnProperty('player')) {
+            console.log(changes.player);
             this.player_form.patchValue({
                 _id: changes.player.currentValue._id,
                 number: changes.player.currentValue.number,

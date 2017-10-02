@@ -16,7 +16,7 @@
       </ion-col>
       <ion-col>
         <div class="shorcuts" *ngIf="team">
-          <button ion-button clear (tap)="this.pane = 'games'" [disabled]="team.players.length === 0">
+          <button ion-button clear (tap)="this.pane = 'games'" [disabled]="team.players.length < 5">
             <ion-icon name="basketball"></ion-icon>
           </button>
           <button ion-button clear (tap)="this.pane = 'players'">
