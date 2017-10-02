@@ -11,7 +11,7 @@ export class ServiceInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Get the auth header from the service.
-        const token = this.bs.get_token();
+        const token = this.bs.token;
 
         if (token) {
             // Clone the request to add the new header.

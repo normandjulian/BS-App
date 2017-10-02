@@ -48,12 +48,12 @@ export class LoginPage implements OnInit {
    */
   sign_in(guest: Guest): void {
     this.service.sign_in(guest).subscribe(
-      (token: Token) => {
-        if (token['error']) {
-          this.notification(token['message']);
+      (response: Credit) => {
+        if (response['error']) {
+          this.notification(response['message']);
         } else {
-          this.storage.set('credits', JSON.stringify(token));
-          this.bs.set_token(token.token);
+          this.storage.set('credits', JSON.stringify(response));
+          this.bs.token = response.token;
           this.navCtrl.setRoot(DashboardPage);
         }
       },
@@ -110,7 +110,7 @@ export class LoginPage implements OnInit {
   }
 }
 
-class Token {
+class Credit {
   email: string;
   token: string;
   _id: string;

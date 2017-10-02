@@ -51,7 +51,7 @@
 
             <!-- Detail game -->
             <ion-col class="games" *ngIf="!layout.zero_game">
-              <div class="actual-game">
+              <div class="score-board">
                 <div class="time">10:00</div>
                 <div class="teams">
                   <span>{{team.name}}</span>
@@ -65,43 +65,34 @@
                 <div class="last-action">
                   <!-- Anti-Sportive - #12 DUCLUZEAU F. -->
                 </div>
-                <div class="buttons">
-                  <button ion-button outline>Débuter le match</button>
+              </div>
+              <div class="resume-board">
+                <div class="stats-board">
+                  <div class="stat">
+                    <span>FG</span>
+                    <span>Juan Pablo</span>
+                    <span>6</span>
+                  </div>
+                  <div class="stat">
+                    <span>BLk</span>
+                    <span>Jacques Chirac</span>
+                    <span>2</span>
+                  </div>
+                  <div class="stat">
+                    <span>AST</span>
+                    <span>Bite en court</span>
+                    <span>6</span>
+                  </div>
+                  <div class="stat">
+                    <span>PF</span>
+                    <span>Coco Channel</span>
+                    <span>4</span>
+                  </div>
                 </div>
               </div>
-              <!-- <ion-row>
-                <div class="stat">
-                  <span class="stat-label"></span>
-                  <span class="stat-value"></span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Passes dec. : </span>
-                  <span class="stat-vale">#21 DUCLUZEAU F. - 6</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Points : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 26</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Rebonds : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 12</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Interceptions : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 2</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">Contres : #21 </span>
-                  <span class="stat-vale">DUCLUZEAU F. - 4</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-label">  Fautes : #21 </span>
-                  <span class="stat-vale">GUILLAUTEL M. - 6</span>
-                </div>
-                <div class="button-continue">
-                  <button>Voirs les stats complètes</button>
-                </div>
-              </ion-row> -->
+              <div class="actions">
+                <button ion-button outline>Débuter le match</button>
+              </div>
             </ion-col>
 
             <ion-col [hidden]="!layout.zero_game">
@@ -119,62 +110,6 @@
           </ion-row>
         </ion-grid>
 
-        <!--<div class="pane">
-          <div class="continue">
-            <h3>Match en cours</h3>
-            <div class="teams-score">
-              <span>{{team.name}}</span>
-              <span>Cholet</span>
-            </div>
-            <div class="teams-score">
-              <span>65</span>
-              <span>64</span>
-            </div>
-            <div class="time-action">
-              00:21 <span class="quarter">4em Q.</span>
-            </div>
-            <div class="last-action">
-              Anti-Sportive - #12 DUCLUZEAU F.
-            </div>
-            <div class="button-continue">
-              <button>Clore le match</button>
-              <button>Reprendre</button>
-            </div>
-          </div>
-          <div class="stats">
-            <div class="stat">
-              <span class="stat-label"></span>
-              <span class="stat-value"></span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Passes dec. : </span>
-              <span class="stat-vale">#21 DUCLUZEAU F. - 6</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Points : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 26</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Rebonds : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 12</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Interceptions : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 2</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Contres : #21 </span>
-              <span class="stat-vale">DUCLUZEAU F. - 4</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">  Fautes : #21 </span>
-              <span class="stat-vale">GUILLAUTEL M. - 6</span>
-            </div>
-            <div class="button-continue">
-              <button>Voirs les stats complètes</button>
-            </div>
-          </div>
-        </div>-->
       </div>
       <div class="content" *ngIf="pane === 'players'">
         <ion-grid>
@@ -205,36 +140,8 @@
                   </app-create-player>
                 </ion-col>
               </ion-row>
-              <!-- <ion-row *ngIf="!layout.create_player">
-                <ion-col class="text-align-right">
-                  <div>
-                    <ion-row>
-                      <ion-col>
-                        <button ion-button outline>
-                          Statistique de tous les matchs
-                        </button>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col>
-                        <ion-list class="list">
-                          <ion-item>
-                            <ion-select>
-                              <ion-option>Bite</ion-option>
-                            </ion-select>
-                          </ion-item>
-                        </ion-list>
-                      </ion-col>
-                      <ion-col>
-                        <button ion-button outline>
-                          Statistque d'un match
-                        </button>
-                      </ion-col>
-                    </ion-row>
-                  </div>
-                </ion-col>
-              </ion-row> -->
             </ion-col>
+
             <ion-col [hidden]="!layout.zero_player">
               <div class="no-players">
                 <div class="text-info" (tap)="goto_first_player()">
@@ -247,6 +154,7 @@
                 </div>
               </div>
             </ion-col>
+            
           </ion-row>
         </ion-grid>
       </div>

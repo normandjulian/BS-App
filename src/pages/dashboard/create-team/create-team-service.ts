@@ -18,6 +18,6 @@ export class TeamService {
      * @returns {Observable<TeamFull>}
      */
     create_team(team): Observable<TeamFull> {
-        return this.http.post<TeamFull>(`${this.bs.get_uri()}/teams`, team);
+        return this.http.post<TeamFull>(`${this.bs.uri}/teams`, team);
     }
 }

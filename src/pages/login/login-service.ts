@@ -15,7 +15,7 @@ export class LoginService {
   }
 
   sign_in(guest: Guest): Observable<Object> { // +++++++++++++++++++++++++++++++++++++++++++++++++> Sign in
-    return this.http.post(`${this.bs.get_uri()}/signin`, guest);
+    return this.http.post(`${this.bs.uri}/signin`, guest);
   }
 }
 

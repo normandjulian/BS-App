@@ -13,10 +13,10 @@ export class RegisterService {
     }
 
     get_clubs(): Observable<Club[]> { // ++++++++++++++++++++++++++++++++++++++++++++++++++++++> Get Clubs
-        return this.http.get<Club[]>(`${this.bs.get_uri()}/clubs`);
+        return this.http.get<Club[]>(`${this.bs.uri}/clubs`);
     };
 
     sign_up(guest: RegisterUser): Observable<Object> { // +++++++++++++++++++++++++++++++++++++++++++++++++> Sign up
-        return this.http.post(`${this.bs.get_uri()}/signup`, guest);
+        return this.http.post(`${this.bs.uri}/signup`, guest);
     }
 }

@@ -92,11 +92,9 @@ page-dashboard {
           }
           ion-col.games {
             height: 100%;
-            div.actual-game {
-              margin-bottom: 15px;
-              text-align: center;
-              position: relative;
-              height: 100%;
+            text-align: center;
+            div.score-board {
+              height: 40%;
               div.time {
                 font-size: 4.5em;
                 width: 100%;
@@ -105,7 +103,8 @@ page-dashboard {
                 font-size: 2.5em;
                 width: 100%;
               }
-              div.teams, div.score {
+              div.teams,
+              div.score {
                 display: flex;
                 justify-content: space-between;
                 span {
@@ -118,10 +117,45 @@ page-dashboard {
                   font-size: 4.5em
                 }
               }
-              div.buttons {
-                position: absolute;
-                bottom: 2px;
-                right: 5px;
+            }
+            div.resume-board {
+              height: 50%;
+              div.stats-board {
+                font-size: 1.5em;
+                margin-right: 10%;
+                margin-left: 10%;
+                div.stat {  
+                  display: flex;
+                  border: 1px solid color($colors, primary);
+                  border-bottom: none;
+                  &:last-of-type {
+                    border-bottom: 1px solid color($colors, primary);
+                  }
+                  span {
+                    text-align: left;
+                    padding-left: 15px;
+                    &:nth-child(1) {
+                      background-color: color($colors, primary);
+                      color: color($colors, white);
+                      width: 70px;
+                    }
+                    &:nth-child(2) {
+                      width: calc(85% - 50px);
+                    }
+                    &:nth-child(3) {
+                      text-align: center;
+                      width: 50px;
+                    }
+                  }
+                }
+              }
+            }
+            div.actions {
+              height: 10%;
+              button {
+                height: 100%;
+                display: block;
+                margin: 0 auto;
               }
             }
           }

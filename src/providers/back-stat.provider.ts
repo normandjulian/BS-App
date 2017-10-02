@@ -14,15 +14,15 @@ export class BackStatProvider {
     constructor() {
     }
 
-    set_token(token: string) {
+    set token(token: string) {
         this._token = token;
     }
 
-    get_token() {
+    get token() {
         return this._token;
     }
 
-    get_uri() {
+    get uri() {
         return this._uri;
     }
 

@@ -21,7 +21,7 @@ export class DashboardService {
      * @returns {Observable<Team[]>}
      */
     get_teams(): Observable<Team[]> {
-        return this.http.get<Team[]>(`${this.bs.get_uri()}/teams`);
+        return this.http.get<Team[]>(`${this.bs.uri}/teams`);
     }
 
     /**
@@ -30,15 +30,15 @@ export class DashboardService {
      * @return {Observable<TeamFull>}         [the team selected]
      */
     public get_team(team_id: string): Observable<TeamFull> {
-        return this.http.get<TeamFull>(`${this.bs.get_uri()}/teams/${team_id}/full`);
+        return this.http.get<TeamFull>(`${this.bs.uri}/teams/${team_id}/full`);
     }
 
     public create_player(player: Player): Observable<Player> {
-        return this.http.post<Player>(`${this.bs.get_uri()}/players`, player);
+        return this.http.post<Player>(`${this.bs.uri}/players`, player);
     }
 
     public update_player(player: Player): Observable<Player> {
-        return this.http.put<Player>(`${this.bs.get_uri()}/players/${player._id}`, player);
+        return this.http.put<Player>(`${this.bs.uri}/players/${player._id}`, player);
     }
 
     /************************************************************/
@@ -51,7 +51,7 @@ export class DashboardService {
      * @returns {Observable<Team[]>} - The game created
      */
     public create_game(game: Game): Observable<Game> {
-        return this.http.post<Game>(`${this.bs.get_uri()}/games`, game);
+        return this.http.post<Game>(`${this.bs.uri}/games`, game);
     }
 
     /**
@@ -60,7 +60,7 @@ export class DashboardService {
      * @return {Observable<GameFull>}         [the game selected]
      */
     public get_game(game_id: string): Observable<GameFull> {
-        return this.http.get<GameFull>(`${this.bs.get_uri()}/games/${game_id}/full`);
+        return this.http.get<GameFull>(`${this.bs.uri}/games/${game_id}/full`);
     }
 
     /*  delete_team(_id: String) {
