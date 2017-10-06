@@ -1,3 +1,4 @@
+import { StatPage } from './../pages/stat/stat';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -30,7 +31,8 @@ import { CreateGamePage } from "../pages/dashboard/create-game/create-game";
     CreateTeamPage,
     CreateGamePage,
     CreatePlayerComponent,
-    ManagePlayerComponent
+    ManagePlayerComponent,
+    StatPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { CreateGamePage } from "../pages/dashboard/create-game/create-game";
     RegisterPage,
     DashboardPage,
     CreateTeamPage,
-    CreateGamePage
+    CreateGamePage,
+    StatPage
   ],
   providers: [
     StatusBar,

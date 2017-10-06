@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { NavController, NavParams, Platform, ViewController } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 import { TeamService } from './create-team-service';
 import { BackStatProvider } from "../../../providers/back-stat.provider";
 import { Team, TeamFull } from "../../../classes/team.class";

@@ -1,3 +1,4 @@
+import { StatPage } from './../stat/stat';
 import { GameFull } from './../../classes/game.class';
 import { AlertController, NavController, ModalController } from 'ionic-angular';
 import { Component } from '@angular/core';
@@ -19,11 +20,10 @@ import _ from 'lodash';
 export class DashboardPage {
   public teams: Array<Team | TeamFull>;
   public team: TeamFull;
-  public game: GameFull;
   public pane: string;
   public selected_player: Player;
   public selected_team: Team; // The team selected in the UI <select/>
-  public selected_game: Game;
+  public selected_game: GameFull;
   public layout: any = {
     zero_player: false,
     create_player: false,
@@ -90,15 +90,17 @@ export class DashboardPage {
     }).present();
   }
 
+  /************************************************************/
+  /*************************** STAT ***************************/
+  /************************************************************/
+
   /**
    * Nav to the StatPage
-   * @param  {string} id [The game's id]
    */
-  goto_stat(id: string): void {
-    // this.navController.push(StatPage, {
-    //   team_id: this.team._id,
-    //   game_id: id
-    // });
+  public goto_stat(): void {
+    this.navController.push(StatPage, {
+      game_id: this.selected_game._id
+    });
   }
 
   /************************************************************/
@@ -129,8 +131,7 @@ export class DashboardPage {
           if (this.team.games.length === 0) {
             this.layout.zero_game = true;
           } else {
-            this.selected_game = _.first(this.team.games);
-            this.get_game(this.selected_game);
+            this.get_game(_.first(this.team.games));
           }
         }
       }
@@ -162,7 +163,10 @@ export class DashboardPage {
 
   public get_game(game: Game) {
     this.service.get_game(game._id).subscribe(
-      (response: Game) => this.game = response,
+      (response: Game) => {
+        this.selected_game = response
+        this.goto_stat();
+      },
       (error: any) => console.log(error)
     );
   }

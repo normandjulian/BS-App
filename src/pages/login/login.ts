@@ -54,6 +54,7 @@ export class LoginPage implements OnInit {
         } else {
           this.storage.set('credits', JSON.stringify(response));
           this.bs.token = response.token;
+          console.log(response.token);
           this.navCtrl.setRoot(DashboardPage);
         }
       },
