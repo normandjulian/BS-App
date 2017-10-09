@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-// import { StatService } from './stat-service';
+import { StatService } from './stat-service';
 import { Stat } from '../../classes/stat.class';
+import { GameFull } from '../../classes/game.class';
 import { Player } from '../../classes/player.class';
 // import { ListStatsComponent } from './list-stats/list-stats.component';
 
 @Component({
   selector: 'page-stat',
-  templateUrl: 'stat.html'
-//   providers: [StatService]
+  templateUrl: 'stat.html',
+  providers: [StatService]
 })
 export class StatPage {
+  public game: GameFull;
   public stat: Stat = null;
   public selectAction: boolean = true;
   public selectPlayer: boolean = true;
@@ -20,7 +22,6 @@ export class StatPage {
   public time: string;
   public timerSeconds: number = 330;
   public actions: string[] = ['ast', 'blk', 'dreb', 'oreb', 'pf', 'st', 'to'];
-  public game_id: string = null;
   public team_id: string = null;
 
   /**
@@ -30,23 +31,26 @@ export class StatPage {
     public storage: Storage,
     public navController: NavController,
     public navParams: NavParams,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController,
+    private service: StatService) { }
 
   /**
    * Initialise the storage
    * Get back or set my game
    */
-  set_up_storage() {
-    // this.storage.get(this.game_id).then((res) => {
-    //   if (!res) {
-    //     // Else I create it
-    //     let game = {
-    //       _id: this.game_id,
-    //       stats: []
-    //     };
-    //     this.storage.set(this.game_id, JSON.stringify(game));
-    //   }
-    // });
+  setup_storage() {
+    const game_id = this.service.game._id;
+    this.storage.get(game_id).then(
+      (res) => {
+        if (!res) {
+          // Else I create it
+          const game = {
+            _id: game_id,
+            stats: []
+          };
+          this.storage.set(game_id, JSON.stringify(game));
+        }
+      });
   }
 
   push_stat_2storage(stat: Stat) {
@@ -64,18 +68,6 @@ export class StatPage {
     // });
   }
 
-  clean_stat() {
-    // this.stat = {
-    //   _id: null,
-    //   area: null,
-    //   time: null,
-    //   action: null,
-    //   player_id: null,
-    //   game_id: this.game_id,
-    //   team_id: this.team_id
-    // };
-  }
-
   /**
    * Get back the time
    * @param  {_time} value [the time of the game]
@@ -91,7 +83,7 @@ export class StatPage {
   tapOnCourt(area: number): void {
     // this.stat.area = area;
     // this.stat.time = this.time;
-    // this.selectAction = false;
+    this.selectAction = false;
   }
 
   /**
@@ -100,8 +92,8 @@ export class StatPage {
    */
   tapOnAction(action: string): void {
     // this.stat['action'] = action;
-    // this.selectAction = true;
-    // this.selectPlayer = false;
+    this.selectAction = true;
+    this.selectPlayer = false;
   }
 
   tapOnPlayer(player: Player): void {
@@ -116,41 +108,18 @@ export class StatPage {
     // );
   }
 
-  set_up() {
-    // this.set_up_storage();
-    // this.players = [
-    //   {
-    //     _id: '0',
-    //     firstname: 'Julian',
-    //     lastname: 'Normand',
-    //     number: 4,
-    //     team_id: '5856b8f2bd6c1763b20faef5'
-    //   },
-    //   {
-    //     _id: '1',
-    //     firstname: 'jyujuyk',
-    //     lastname: 'sdfs',
-    //     number: 5,
-    //     team_id: '5856b8f2bd6c1763b20faef5'
-    //   },
-    //   {
-    //     _id: '2',
-    //     firstname: 'eee',
-    //     lastname: 'zerz',
-    //     number: 7,
-    //     team_id: '5856b8f2bd6c1763b20faef5'
-    //   },
-    // ];
-    // this.statService.get_players(this.stat.team_id).subscribe(
-    //   res => this.players = res,
-    // )
-    this.clean_stat();
+  set_up(game_id: string) {
+    this.service.get_game(game_id).subscribe(
+      (response: GameFull) => {
+        this.game = this.service.game;
+        this.setup_storage();
+      });
   }
 
   ionViewDidLoad() {
-    // this.game_id = this.navParams.get('game_id') || '5856b947c5242563c5a4cfbc';
+    // this.game_id =  || '5856b947c5242563c5a4cfbc';
     // this.team_id = this.navParams.get('team_id') || '5856b7bd80affe631645e390';
-    this.set_up();
+    this.set_up(this.navParams.get('game_id'));
   }
 
   presentProfileModal() {

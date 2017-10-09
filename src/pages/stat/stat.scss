@@ -78,6 +78,9 @@ page-stat {
             height: 100%;
             width: 100%;
           }
+          &.board {
+            border: 1px solid color($colors, primary);
+          }
         }
       }
     }

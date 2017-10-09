@@ -120,7 +120,7 @@ export class DashboardPage {
         // If there's no player
         if (players_length === 0) {
           this.layout.zero_player = true;
-        } else if (this.team.players.length < 6) {
+        } else if (this.team.players.length < 5) {
           // If there's less than 5 players
           this.selected_player = _.first(this.team.players);
           this.pane = 'players';
