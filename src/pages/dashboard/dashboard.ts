@@ -1,13 +1,12 @@
 import { StatPage } from './../stat/stat';
 import { GameFull } from './../../classes/game.class';
-import { AlertController, NavController, ModalController } from 'ionic-angular';
+import { AlertController, ModalController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { DashboardService } from './dashboard-service';
 import { Game } from '../../classes/game.class';
 import { Team, TeamFull } from '../../classes/team.class';
 import { Player } from '../../classes/player.class';
 import { CreateTeamPage } from './create-team/create-team';
-import { BackStatProvider } from "../../providers/back-stat.provider";
 import { CreateGamePage } from "./create-game/create-game";
 import _ from 'lodash';
 
@@ -18,11 +17,9 @@ import _ from 'lodash';
 })
 
 export class DashboardPage {
-  public teams: Array<Team | TeamFull>;
   public team: TeamFull;
   public pane: string;
   public selected_player: Player;
-  public selected_team: Team; // The team selected in the UI <select/>
   public selected_game: GameFull;
   public layout: any = {
     zero_player: false,
@@ -31,27 +28,13 @@ export class DashboardPage {
     create_game: false
   };
 
-  constructor(private navController: NavController,
-    private service: DashboardService,
+  constructor(private service: DashboardService,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController,
-    private bs: BackStatProvider) {
+    private modalCtrl: ModalController) {
+
   }
 
-  delete_team(_id) {
-    /*this.notification('Supprimer cette équipe ?', 'Supprimer une équipe, supprime aussi ses joueurs, ses matchs et ses statistiques', 'Peu m\'importe', () => {
-     this.service.delete_team(_id).subscribe(
-     res => {
-     for (let key in this.teams) {
-     if (this.teams[key]._id === _id) {
-     this.teams.splice(Number(key), 1);
-     }
-     }
-     },
-     err => console.log(err)
-     );
-     });*/
-  }
+  delete_team(_id) { }
 
   /**
    * Store the game selected by the user
@@ -94,15 +77,6 @@ export class DashboardPage {
   /*************************** STAT ***************************/
   /************************************************************/
 
-  /**
-   * Nav to the StatPage
-   */
-  public goto_stat(): void {
-    this.navController.push(StatPage, {
-      game_id: this.selected_game._id
-    });
-  }
-
   /************************************************************/
   /*************************** TEAM ***************************/
   /************************************************************/
@@ -110,12 +84,13 @@ export class DashboardPage {
   /**
    * Select the team which the user tap on it
    */
-  set_team(team: Team) {
+  set_team(team_id: string) {
     let players_length: number;
-    this.service.get_team(team._id).subscribe(
-      (team: TeamFull) => {
-        this.team = team;
+    this.service.get_team(team_id).subscribe(
+      (response: TeamFull) => {
+        this.team = response;
         players_length = this.team.players.length;
+        this.pane = 'players';
 
         // If there's no player
         if (players_length === 0) {
@@ -123,11 +98,9 @@ export class DashboardPage {
         } else if (this.team.players.length < 6) {
           // If there's less than 5 players
           this.selected_player = _.first(this.team.players);
-          this.pane = 'players';
         } else {
           this.selected_player = _.first(this.team.players);
           this.pane = 'games';
-
           if (this.team.games.length === 0) {
             this.layout.zero_game = true;
           } else {
@@ -165,21 +138,21 @@ export class DashboardPage {
     this.service.get_game(game._id).subscribe(
       (response: Game) => {
         this.selected_game = response
-        this.goto_stat();
+        // this.goto_stat();
       },
       (error: any) => console.log(error)
     );
   }
-
+  
   /*************************************************************/
-  /************************** PLAYER ***************************/
   /*************************************************************/
-
+  /*************************************************************/
+  
   public goto_first_player() {
     this.layout.create_player = true;
     this.layout.zero_player = false;
   }
-
+  
   /**
    * When a the user create a new player
    * Come from the Output of app-create-player
@@ -191,7 +164,7 @@ export class DashboardPage {
     this.layout.create_player = false;
     this.layout.zero_player = false;
   }
-
+  
   /**
    * When the user [cancel] the player creation
    * Show the players if the team have some
@@ -206,7 +179,7 @@ export class DashboardPage {
       this.layout.zero_player = true;
     }
   }
-
+  
   /**
    * When the user update the player
    * From the app-manage-player
@@ -217,23 +190,7 @@ export class DashboardPage {
     let player_index = _.findIndex(this.team.players, { _id: player._id });
     this.team.players[player_index] = player;
   }
-
-  /************************************************************/
-
-  ionViewDidLoad() {
-    this.bs.get_teams().subscribe(
-      (teams: Array<Team | TeamFull>) => {
-        this.teams = teams;
-        if (this.teams.length !== 0) {
-          this.selected_team = _.last(this.teams);
-          this.set_team(_.last(this.teams));
-        }
-      }
-    );
-
-    this.service.get_teams().subscribe(
-      (teams: Team[]) => this.bs.set_teams(teams),
-      err => console.error(err)
-    );
-  };
+  
+  /************************** PLAYER ***************************/
+  ionViewDidLoad() { };
 }

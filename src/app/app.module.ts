@@ -1,3 +1,5 @@
+import { DashboardHeaderComponent } from './../pages/dashboard/header/dashboard-header';
+import { DetailGameComponent } from './../pages/dashboard/game/detail-game';
 import { StatPage } from './../pages/stat/stat';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -32,6 +34,8 @@ import { CreateGamePage } from "../pages/dashboard/create-game/create-game";
     CreateGamePage,
     CreatePlayerComponent,
     ManagePlayerComponent,
+    DashboardHeaderComponent,
+    DetailGameComponent,
     StatPage
   ],
   imports: [

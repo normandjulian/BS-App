@@ -1,34 +1,7 @@
 <ion-content padding disable-scroll>
-  <div *ngIf="teams && teams.length !== 0">
+  <div>
     <ion-row class="header">
-      <ion-col>
-        <ion-list>
-          <ion-item>
-            <ion-select [(ngModel)]="selected_team" (ionChange)="set_team(selected_team)">
-              <ion-option *ngFor="let team of teams" [value]="team">{{team.name}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <button ion-button>
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col>
-        <div class="shorcuts" *ngIf="team">
-          <button ion-button clear (tap)="this.pane = 'games'" [disabled]="team.players.length < 5">
-            <ion-icon name="basketball"></ion-icon>
-          </button>
-          <button ion-button clear (tap)="this.pane = 'players'">
-            <ion-icon name="people"></ion-icon>
-          </button>
-          <button ion-button clear (tap)="this.pane = 'stats'">
-            <ion-icon name="stats"></ion-icon>
-          </button>
-          <button ion-button clear (tap)="this.pane = 'detail'">
-            <ion-icon name="cog"></ion-icon>
-          </button>
-        </div>
-      </ion-col>
+      <app-dashboard-header (team_id)="set_team($event)"></app-dashboard-header>
     </ion-row>
 
     <div class="dashboard">
@@ -53,48 +26,7 @@
 
             <!-- Detail game -->
             <ion-col class="games" *ngIf="!layout.zero_game && selected_game">
-              <div class="score-board">
-                <div class="time">10:00</div>
-                <div class="teams">
-                  <span>{{team.name}}</span>
-                  <span>{{selected_game.opponent}}</span>
-                </div>
-                <div class="quarter">1er Q.</div>
-                <div class="score">
-                  <span>0</span>
-                  <span>0</span>
-                </div>
-                <div class="last-action">
-                  <!-- Anti-Sportive - #12 DUCLUZEAU F. -->
-                </div>
-              </div>
-              <div class="resume-board">
-                <div class="stats-board">
-                  <div class="stat">
-                    <span>FG</span>
-                    <span>Juan Pablo</span>
-                    <span>6</span>
-                  </div>
-                  <div class="stat">
-                    <span>BLk</span>
-                    <span>Jacques Chirac</span>
-                    <span>2</span>
-                  </div>
-                  <div class="stat">
-                    <span>AST</span>
-                    <span>Bite en court</span>
-                    <span>6</span>
-                  </div>
-                  <div class="stat">
-                    <span>PF</span>
-                    <span>Coco Channel</span>
-                    <span>4</span>
-                  </div>
-                </div>
-              </div>
-              <div class="actions">
-                <button ion-button outline>Débuter le match</button>
-              </div>
+              <app-detail-game [game]="selected_game" [team]="team"></app-detail-game>
             </ion-col>
 
             <ion-col [hidden]="!layout.zero_game">
@@ -156,7 +88,7 @@
                 </div>
               </div>
             </ion-col>
-            
+
           </ion-row>
         </ion-grid>
       </div>

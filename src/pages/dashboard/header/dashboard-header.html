@@ -1,0 +1,28 @@
+<ion-col>
+  <ion-list>
+    <ion-item>
+      <ion-select [(ngModel)]="selected_team" (ionChange)="team_change(selected_team)">
+        <ion-option *ngFor="let team of teams$ | async" [value]="team._id">{{team.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <button ion-button (tap)="goto_create_team()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-col>
+<ion-col>
+  <div class="shorcuts">
+    <button ion-button clear (tap)="this.pane = 'games'" [disabled]="team.players.length < 5">
+      <ion-icon name="basketball"></ion-icon>
+    </button>
+    <button ion-button clear (tap)="this.pane = 'players'">
+      <ion-icon name="people"></ion-icon>
+    </button>
+    <button ion-button clear (tap)="this.pane = 'stats'" [disabled]="team.players.length < 5">
+      <ion-icon name="stats"></ion-icon>
+    </button>
+    <button ion-button clear (tap)="this.pane = 'detail'">
+      <ion-icon name="cog"></ion-icon>
+    </button>
+  </div>
+</ion-col>
