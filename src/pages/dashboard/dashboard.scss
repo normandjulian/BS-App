@@ -3,12 +3,11 @@ page-dashboard {
     div.scroll-content {
       color: color($colors, white);
       overflow-y: hidden;
-      ion-row.header {
-      }
+     
       div.dashboard {
         border: 1px solid color($colors, primary);
         position: absolute;
-        top: 100px;
+        top: 80px;
         right: 15px;
         left: 15px;
         bottom: 15px;

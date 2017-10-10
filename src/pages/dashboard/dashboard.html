@@ -1,8 +1,6 @@
 <ion-content padding disable-scroll>
   <div>
-    <ion-row class="header">
-      <app-dashboard-header (team_id)="set_team($event)"></app-dashboard-header>
-    </ion-row>
+      <app-dashboard-header (team_full)="new_team($event)"></app-dashboard-header>
 
     <div class="dashboard">
       <div class="content" *ngIf="pane === 'games'">

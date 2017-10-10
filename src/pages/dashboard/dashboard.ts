@@ -111,6 +111,11 @@ export class DashboardPage {
     );
   }
 
+  new_team(team: TeamFull) {
+    this.team = team;
+    // this.pane = 'players';
+  }
+
   /**
    * GO TO -> Create a team
    */

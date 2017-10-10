@@ -1,35 +1,43 @@
 app-dashboard-header {
-  width: 100%;
-  ion-col {
-    &:first-of-type {
-      padding-left: 0;
-      display: flex;
-      button {
-        font-size: xx-large;
-        height: 100%;
-        margin: 0;
-        margin-left: 10px;
-        width: 30px;
-      }
-    }
-    &:last-of-type {
-      text-align: right;
-      padding-right: 0;
-      div.shorcuts {
-        height: 100%;
+  position: absolute;
+  top: 15px;
+  height: 50px;
+  left: 15px;
+  right: 15px;
+  ion-row.header {
+    width: 100%;
+    height: 100%;
+    ion-col {
+      &:first-of-type {
+        padding-left: 0;
+        display: flex;
         button {
           font-size: xx-large;
           height: 100%;
           margin: 0;
-          width: 70px;
-          border: 1px solid color($colors, primary);
-          margin-left: 15px;
-          margin-right: 15px;
-          &:first-of-type {
-            margin-left: 0;
-          }
-          &:last-of-type {
-            margin-right: 0;
+          margin-left: 10px;
+          width: 30px;
+        }
+      }
+      &:last-of-type {
+        text-align: right;
+        padding-right: 0;
+        div.shorcuts {
+          height: 100%;
+          button {
+            font-size: x-large;
+            height: 100%;
+            margin: 0;
+            width: 50px;
+            border: 1px solid color($colors, primary);
+            margin-left: 15px;
+            margin-right: 15px;
+            &:first-of-type {
+              margin-left: 0;
+            }
+            &:last-of-type {
+              margin-right: 0;
+            }
           }
         }
       }
