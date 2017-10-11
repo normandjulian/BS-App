@@ -1,8 +1,8 @@
 <ion-content padding disable-scroll>
   <div>
-      <app-dashboard-header (team_full)="new_team($event)"></app-dashboard-header>
+    <app-dashboard-header (team_full)="switch_team($event)" (panel)="switch_panel($event)"></app-dashboard-header>
 
-    <div class="dashboard">
+    <div *ngIf="team" class="dashboard">
       <div class="content" *ngIf="pane === 'games'">
         <ion-grid>
           <ion-row>
@@ -23,11 +23,15 @@
             </ion-col>
 
             <!-- Detail game -->
-            <ion-col class="games" *ngIf="!layout.zero_game && selected_game">
-              <app-detail-game [game]="selected_game" [team]="team"></app-detail-game>
+            <ion-col class="games" *ngIf="team.games.length !== 0">
+              <app-detail-game 
+                [game]="selected_game"
+                [team]="team"
+                *ngIf="selected_game">
+              </app-detail-game>
             </ion-col>
 
-            <ion-col [hidden]="!layout.zero_game">
+            <ion-col *ngIf="team.games.length === 0">
               <div class="no-players">
                 <div class="text-info" (tap)="goto_create_game()">
                   Vous n'avez pas encore de match ! Créez en un
@@ -92,7 +96,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="teams && teams.length === 0" class="no-teams">
+  <div *ngIf="!team" class="no-teams">
     <div class="text-info">
       Vous n'avez pas encore d'équipe ! Créez en une
       <br/>

@@ -11,6 +11,24 @@ app-dashboard-header {
       &:first-of-type {
         padding-left: 0;
         display: flex;
+        ion-select.select {
+          margin: 0;
+          height: 100%;
+          max-width: calc(100% - 50px);
+          width: calc(100% - 50px);
+          border: 0.55px solid color($colors, primary);
+          padding: 5px 10px;
+          div.select-text {
+            height: 100%;
+            font-size: 24px;
+            border: 0;
+            color: color($colors, primary);
+          }
+          div.select-icon {
+            width: 17px;
+            height: 27px;
+          }
+        }
         button {
           font-size: xx-large;
           height: 100%;

@@ -1,28 +1,24 @@
-<ion-row class="header">
+<ion-row class="header" [hidden]="hide_header">
   <ion-col>
-    <ion-list>
-      <ion-item>
-        <ion-select [(ngModel)]="selected_team_id" (ionChange)="team_change(selected_team)">
-          <ion-option *ngFor="let team of teams$ | async" [value]="team._id">{{team.name}}</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
+    <ion-select [(ngModel)]="selected_team" (ionChange)="ionChangeTeam()">
+      <ion-option *ngFor="let team of teams$ | async" [value]="team">{{team.name}}</ion-option>
+    </ion-select>
     <button ion-button (tap)="goto_create_team()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-col>
-  <ion-col *ngIf="selected_team">
+  <ion-col *ngIf="team">
     <div class="shorcuts">
-      <button ion-button clear (tap)="this.pane = 'games'" [disabled]="selected_team.players.length < 5">
+      <button ion-button clear (tap)="switch_panel('games')" [disabled]="team.players.length < 5">
         <ion-icon name="basketball"></ion-icon>
       </button>
-      <button ion-button clear (tap)="this.pane = 'players'">
+      <button ion-button clear (tap)="switch_panel('players')">
         <ion-icon name="people"></ion-icon>
       </button>
-      <button ion-button clear (tap)="this.pane = 'stats'" [disabled]="selected_team.players.length < 5">
+      <button ion-button clear (tap)="switch_panel('stats')" [disabled]="team.players.length < 5">
         <ion-icon name="stats"></ion-icon>
       </button>
-      <button ion-button clear (tap)="this.pane = 'detail'">
+      <button ion-button clear (tap)="switch_panel('detail')">
         <ion-icon name="cog"></ion-icon>
       </button>
     </div>
