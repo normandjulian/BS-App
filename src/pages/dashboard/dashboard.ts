@@ -108,6 +108,7 @@ export class DashboardPage {
       } else {
         this.selected_player = _.first(this.team.players);
         this.pane = 'games';
+        this.pane = 'details';
         if (this.team.games.length === 0) {
           this.layout.zero_game = true;
         } else {
@@ -145,13 +146,12 @@ export class DashboardPage {
   }
 
   public get_game(game: Game) {
-    this.service.get_game(game._id).subscribe(
-      (response: Game) => {
-        this.selected_game = response
-        // this.goto_stat();
-      },
-      (error: any) => console.log(error)
-    );
+    if (!this.selected_game || (this.selected_game && game._id !== this.selected_game._id)) {
+      this.service.get_game(game._id).subscribe(
+        (response: Game) => this.selected_game = response,
+        (error: any) => console.log(error)
+      );
+    }
   }
 
   /*************************************************************/
