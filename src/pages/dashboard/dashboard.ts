@@ -73,6 +73,10 @@ export class DashboardPage {
     }).present();
   }
 
+  public switch_panel(panel: string) {
+    this.pane = panel;
+  }
+
   /************************************************************/
   /*************************** STAT ***************************/
   /************************************************************/
@@ -81,34 +85,41 @@ export class DashboardPage {
   /*************************** TEAM ***************************/
   /************************************************************/
 
-  /**
+  /*
    * Select the team which the user tap on it
    */
-  set_team(team_id: string) {
-    let players_length: number;
-    this.service.get_team(team_id).subscribe(
-      (response: TeamFull) => {
-        this.team = response;
-        players_length = this.team.players.length;
-        this.pane = 'players';
 
-        // If there's no player
-        if (players_length === 0) {
-          this.layout.zero_player = true;
-        } else if (this.team.players.length < 5) {
-          // If there's less than 5 players
-          this.selected_player = _.first(this.team.players);
+
+  switch_team(team: TeamFull) {
+    if (!team) {
+      this.no_team_mode();
+    } else {
+      this.team = team;
+      const players_length = this.team.players.length;
+
+      this.pane = 'players';
+
+      // If there's no player
+      if (players_length === 0) {
+        this.layout.zero_player = true;
+      } else if (this.team.players.length < 5) {
+        // If there's less than 5 players
+        this.selected_player = _.first(this.team.players);
+      } else {
+        this.selected_player = _.first(this.team.players);
+        this.pane = 'games';
+        this.pane = 'details';
+        if (this.team.games.length === 0) {
+          this.layout.zero_game = true;
         } else {
-          this.selected_player = _.first(this.team.players);
-          this.pane = 'games';
-          if (this.team.games.length === 0) {
-            this.layout.zero_game = true;
-          } else {
-            this.get_game(_.first(this.team.games));
-          }
+          this.get_game(_.first(this.team.games));
         }
       }
-    );
+    }
+  }
+
+  public no_team_mode() {
+
   }
 
   /**
@@ -135,24 +146,23 @@ export class DashboardPage {
   }
 
   public get_game(game: Game) {
-    this.service.get_game(game._id).subscribe(
-      (response: Game) => {
-        this.selected_game = response
-        // this.goto_stat();
-      },
-      (error: any) => console.log(error)
-    );
+    if (!this.selected_game || (this.selected_game && game._id !== this.selected_game._id)) {
+      this.service.get_game(game._id).subscribe(
+        (response: Game) => this.selected_game = response,
+        (error: any) => console.log(error)
+      );
+    }
   }
-  
+
   /*************************************************************/
   /*************************************************************/
   /*************************************************************/
-  
+
   public goto_first_player() {
     this.layout.create_player = true;
     this.layout.zero_player = false;
   }
-  
+
   /**
    * When a the user create a new player
    * Come from the Output of app-create-player
@@ -164,7 +174,7 @@ export class DashboardPage {
     this.layout.create_player = false;
     this.layout.zero_player = false;
   }
-  
+
   /**
    * When the user [cancel] the player creation
    * Show the players if the team have some
@@ -179,7 +189,7 @@ export class DashboardPage {
       this.layout.zero_player = true;
     }
   }
-  
+
   /**
    * When the user update the player
    * From the app-manage-player
@@ -190,7 +200,7 @@ export class DashboardPage {
     let player_index = _.findIndex(this.team.players, { _id: player._id });
     this.team.players[player_index] = player;
   }
-  
+
   /************************** PLAYER ***************************/
   ionViewDidLoad() { };
 }

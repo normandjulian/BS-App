@@ -44,7 +44,7 @@ export class CreateTeamPage implements OnInit {
             period: this.fb.group({
                 type: [4, [<any>Validators.required]],
                 time: [10, [<any>Validators.required]]
-            }),
+            })
         });
     };
 }

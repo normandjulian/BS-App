@@ -1,3 +1,4 @@
+import { TeamDetailComponent } from './../pages/dashboard/team-detail/team-detail';
 import { DashboardHeaderComponent } from './../pages/dashboard/header/dashboard-header';
 import { DetailGameComponent } from './../pages/dashboard/game/detail-game';
 import { StatPage } from './../pages/stat/stat';
@@ -36,6 +37,7 @@ import { CreateGamePage } from "../pages/dashboard/create-game/create-game";
     ManagePlayerComponent,
     DashboardHeaderComponent,
     DetailGameComponent,
+    TeamDetailComponent,
     StatPage
   ],
   imports: [
