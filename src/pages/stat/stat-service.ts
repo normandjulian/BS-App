@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Storage } from '@ionic/storage';
 import { Game, GameFull } from './../../classes/game.class';
 import { Stat } from './../../classes/stat.class';
@@ -9,7 +10,6 @@ import { HttpClient } from "@angular/common/http";
 @Injectable()
 export class StatService {
     private _game: GameFull;
-    private stats: Stat[];
 
     constructor(
         public http: HttpClient,
@@ -62,8 +62,6 @@ export class StatService {
                         _id: this.game._id,
                         stats: []
                     }));
-                } else {
-                    this.stats = response.stats;
                 }
             }
         );
@@ -87,7 +85,6 @@ export class StatService {
 
                     // Store the game
                     this.storage.set(this.game._id, JSON.stringify(game));
-
                 }
             }
         );

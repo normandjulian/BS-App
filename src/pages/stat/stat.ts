@@ -11,7 +11,7 @@ import { ListStatsComponent } from './list-stats/list-stats';
 @Component({
   selector: 'page-stat',
   templateUrl: 'stat.html',
-  providers: [StatService]
+  providers: [ StatService ]
 })
 export class StatPage {
   public game: GameFull;
@@ -21,7 +21,6 @@ export class StatPage {
   public players: Player[] = null;
   public time: string;
   public timerSeconds: number = 330;
-  public actions: string[] = ['ast', 'blk', 'dreb', 'oreb', 'pf', 'st', 'to'];
   public team_id: string = null;
 
   /**

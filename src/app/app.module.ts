@@ -1,3 +1,4 @@
+import { StatService } from './../pages/stat/stat-service';
 import { ListStatsComponent } from './../pages/stat/list-stats/list-stats';
 import { TeamDetailComponent } from './../pages/dashboard/team-detail/team-detail';
 import { DashboardHeaderComponent } from './../pages/dashboard/header/dashboard-header';
@@ -63,6 +64,7 @@ import { CreateGamePage } from "../pages/dashboard/create-game/create-game";
     StatusBar,
     SplashScreen,
     BackStatProvider,
+    StatService,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: ServiceInterceptorService, multi: true }
   ]
