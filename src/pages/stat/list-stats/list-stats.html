@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Liste des actions sauvegardées
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="stats">
+    <ion-item *ngFor="let stat of stats">
+      <ion-avatar item-left>
+        <img src="../assets/images/jersey/_{{stat.player.number}}-tee-shirt.svg">
+      </ion-avatar>
+      <h2>{{stat.time}} - {{get_action_label(stat.action)}}</h2>
+      <p>{{stat.player.lastname | uppercase}}</p>
+      <button ion-button clear item-right (tap)="delete_action(stat)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,31 @@
+ul.list-actions {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  li {
+    width: 25%;
+    position: relative;
+    img {
+      
+    }
+    &.checked {
+      &:before {
+        content: '';
+      }
+    }
+    &:before {
+      content: '\f05d';
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      color: green;
+      font-size: 26px;
+      padding-right: 0.5em;
+      position: absolute;
+      top: 39px;
+      left: 47px;
+    }
+  }
+}

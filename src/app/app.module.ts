@@ -1,3 +1,4 @@
+import { ListStatsComponent } from './../pages/stat/list-stats/list-stats';
 import { TeamDetailComponent } from './../pages/dashboard/team-detail/team-detail';
 import { DashboardHeaderComponent } from './../pages/dashboard/header/dashboard-header';
 import { DetailGameComponent } from './../pages/dashboard/game/detail-game';
@@ -38,6 +39,7 @@ import { CreateGamePage } from "../pages/dashboard/create-game/create-game";
     DashboardHeaderComponent,
     DetailGameComponent,
     TeamDetailComponent,
+    ListStatsComponent,
     StatPage
   ],
   imports: [
@@ -54,7 +56,8 @@ import { CreateGamePage } from "../pages/dashboard/create-game/create-game";
     DashboardPage,
     CreateTeamPage,
     CreateGamePage,
-    StatPage
+    StatPage,
+    ListStatsComponent
   ],
   providers: [
     StatusBar,

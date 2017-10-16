@@ -109,19 +109,19 @@
           <line fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" x1="134.5" y1="7.5" x2="134.5" y2="17" />
           <line fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" x1="333.5" y1="7.5" x2="333.5" y2="17" />
         </svg>
-        <ul [hidden]="selectAction" class="circle-action">
+        <ul [hidden]="hide_actions" class="circle-action">
           <li *ngFor="let action of game.actions"><img (tap)="tapOnAction(action)" src="../assets/images/{{action}}.png"></li>
         </ul>
-        <ul [hidden]="selectPlayer" class="circle-player">
+        <ul [hidden]="hide_players" class="circle-player">
           <li *ngFor="let player of game.players"><img (tap)="tapOnPlayer(player);" src="../assets/images/jersey/_{{player.number}}-tee-shirt.svg"></li>
         </ul>
       </ion-col>
       <ion-col col-3 class="board">
         <!-- <timer [seconds]="timerSeconds" (timeChange)="getTime($event)"></timer> -->
         <!--<list-stats [game_id]="game_id"></list-stats>-->
-        <!-- <button ion-button icon-only full (tap)="presentProfileModal($event)">
+        <button ion-button icon-only full (tap)="openListStats()">
           <ion-icon name="list"></ion-icon>Liste des actions
-        </button> -->
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>

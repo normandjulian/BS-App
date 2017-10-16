@@ -108,7 +108,6 @@ export class DashboardPage {
       } else {
         this.selected_player = _.first(this.team.players);
         this.pane = 'games';
-        this.pane = 'details';
         if (this.team.games.length === 0) {
           this.layout.zero_game = true;
         } else {

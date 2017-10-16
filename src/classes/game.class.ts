@@ -17,4 +17,5 @@ export class GameFull {
     team_id?: string;
     stats?: any[];
     players?: Player[];
+    actions?: any[];
 }

@@ -1,7 +1,7 @@
 import { StatPage } from './../../stat/stat';
 import { GameFull } from './../../../classes/game.class';
 import { NavController } from 'ionic-angular';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TeamFull } from '../../../classes/team.class';
 
 @Component({
@@ -9,7 +9,7 @@ import { TeamFull } from '../../../classes/team.class';
     templateUrl: 'detail-game.html'
 })
 
-export class DetailGameComponent {
+export class DetailGameComponent implements OnInit {
     @Input() game: GameFull;
     @Input() team: TeamFull;
 
@@ -22,6 +22,12 @@ export class DetailGameComponent {
         this.navController.push(StatPage, {
             game_id: this.game._id
         });
+    }
+
+    ngOnInit() {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        this.goto_stat()
     }
 
 }

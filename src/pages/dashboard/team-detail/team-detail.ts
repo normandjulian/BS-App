@@ -12,6 +12,7 @@ import _ from 'lodash';
 
 export class TeamDetailComponent implements OnInit {
     @Input() team;
+    public actions: any;
     public team_form: FormGroup;
     
     constructor( private fb: FormBuilder) {
@@ -39,6 +40,13 @@ export class TeamDetailComponent implements OnInit {
                 type: this.team.period.type,
                 time: this.team.period.time
             }
+        });
+
+        this.actions = _.map( this.team.actions, (action) => {
+            return {
+                action: action,
+                checked: false
+            };
         });
     }
 }

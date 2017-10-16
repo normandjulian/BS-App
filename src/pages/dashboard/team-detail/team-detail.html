@@ -1,53 +1,66 @@
 <form [formGroup]="team_form" novalidate (ngSubmit)="create( team_form.value )">
-        <ion-grid>
-    
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Nom de votre équipe</ion-label>
-                <ion-input type="text" placeholder="Cadets 1" formControlName="name"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-    
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Nom du coach</ion-label>
-                <ion-input type="text" placeholder="Steve Kerr" formControlName="coach"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-    
-          <div formGroupName="period">
-            <ion-row>
-              <ion-col>
-                <ion-item>
-                  <ion-label>Période</ion-label>
-                  <ion-select formControlName="type">
-                    <ion-option value="2">Mi-temps</ion-option>
-                    <ion-option value="4">Quart-temps</ion-option>
-                    <ion-option value="6">6 temps</ion-option>
-                  </ion-select>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-    
-            <ion-row>
-              <ion-col>
-                <ion-item>
-                  <ion-label>Minutes par temps</ion-label>
-                  <ion-input type="number" placeholder="Temps" formControlName="time"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </div>
-    
-          <ion-row class="stick-bottom">
-            <ion-col>
-              <button type="submit" [disabled]="!team_form.valid" ion-button full color="primary">Créer</button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-    
-      </form>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Nom de votre équipe</ion-label>
+          <ion-input type="text" placeholder="Cadets 1" formControlName="name"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Nom du coach</ion-label>
+          <ion-input type="text" placeholder="Steve Kerr" formControlName="coach"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <div formGroupName="period">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Période</ion-label>
+            <ion-select formControlName="type">
+              <ion-option value="2">Mi-temps</ion-option>
+              <ion-option value="4">Quart-temps</ion-option>
+              <ion-option value="6">6 temps</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Minutes par temps</ion-label>
+            <ion-input type="number" placeholder="Temps" formControlName="time"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ion-row *ngIf="team && actions">
+      <ion-col>
+        <ion-label>Actions séléctionnées</ion-label>
+      </ion-col>
+      <ion-col>
+        <ul class="list-actions">
+          <li *ngFor="let action of actions" (tap)="action.checked = !action.checked" [ngClass]="{'checked': action.checked}">
+            <img src="assets/images/{{action.action}}.png">
+          </li>
+        </ul>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="stick-bottom">
+      <ion-col>
+        <button type="submit" [disabled]="!team_form.valid" ion-button full color="primary">Enregistrer</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</form>
